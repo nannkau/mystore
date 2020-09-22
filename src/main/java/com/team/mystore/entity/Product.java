@@ -10,11 +10,11 @@ import java.util.List;
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId")
+    @Column(name = "product_id")
     private Integer productId;
     @Column(name = "name",length = 100)
     private String name;
-    @Column(name = "amountTotal")
+    @Column(name = "amount_total")
     private Integer amountTotal;
     @Column(name = "price")
     private Integer price;
@@ -22,13 +22,13 @@ public class Product implements Serializable {
     private String image;
     @Column(name = "detail",length = 100)
     private String detail;
-    @Column(name = "flagDelete", nullable = false,length = 1)
-    private String flagDelete;
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @ManyToOne
-    @JoinColumn(name="supplierId")
+    @JoinColumn(name="supplier_id")
     private Supplier supplier;
     @ManyToOne
-    @JoinColumn(name="categoryId")
+    @JoinColumn(name="category_id")
     private Category category;
     @OneToMany(mappedBy = "product")
     private List<InvoiceDetail> invoiceDetails=new ArrayList<>();
@@ -83,12 +83,12 @@ public class Product implements Serializable {
         this.detail = detail;
     }
 
-    public String getFlagDelete() {
-        return flagDelete;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagDelete(String flagDelete) {
-        this.flagDelete = flagDelete;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Supplier getSupplier() {

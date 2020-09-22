@@ -10,16 +10,16 @@ import java.util.List;
 public class Supplier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "supplierId")
+    @Column(name = "supplier_id")
     private  Integer supplierId;
     @Column(name = "name",length = 100)
     private String name;
-    @Column(name = "phoneNumber",length = 15)
+    @Column(name = "phoneNumber",length = 12)
     private String phoneNumber;
-    @Column(name = "address",length = 100)
+    @Column(name = "address")
     private String address;
-    @Column(name = "flagDelete", nullable = false)
-    private String flagDelete;
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @OneToMany(mappedBy = "supplier")
     private List<Product> products= new ArrayList<>();
 
@@ -63,11 +63,11 @@ public class Supplier implements Serializable {
         this.products = products;
     }
 
-    public String getFlagDelete() {
-        return flagDelete;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagDelete(String flagDelete) {
-        this.flagDelete = flagDelete;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -9,18 +9,18 @@ import java.util.List;
 public class Consumer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "consumerId")
+    @Column(name = "consumer_id")
     private Integer consumerId;
     @Column(name = "name",length = 100)
     private String name;
-    @Column(name="address",length = 100)
+    @Column(name="address")
     private String address;
-    @Column(name="phoneNumber",length = 100)
+    @Column(name="phone_number",length = 12)
     private String phoneNumber;
     @Column(name="email",length = 100)
     private String email;
-    @Column(name = "flagDelete", nullable = false)
-    private String flagDelete;
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @OneToMany(mappedBy = "consumer")
     private List<Invoice> invoices= new ArrayList<>();
 
@@ -72,11 +72,11 @@ public class Consumer {
         this.invoices = invoices;
     }
 
-    public String getFlagDelete() {
-        return flagDelete;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagDelete(String flagDelete) {
-        this.flagDelete = flagDelete;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

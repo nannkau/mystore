@@ -3,20 +3,20 @@ package com.team.mystore.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "RecevieDetail")
+@Table(name = "recevie_detail")
 public class RecevieDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recevieDetailId")
+    @Column(name = "recevie_detail_id")
     private Integer recevieDetailId;
-    @Column(name = "amountTotal")
+    @Column(name = "amount_total")
     private Integer amountTotal;
     @ManyToOne()
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "product_id")
     private Product product;
     @ManyToOne()
-    @JoinColumn(name = "receiveId")
-    private Receive receive;
+    @JoinColumn(name = "recevie_id")
+    private Recevie recevie;
 
     public Integer getRecevieDetailId() {
         return recevieDetailId;
@@ -42,12 +42,12 @@ public class RecevieDetail {
         this.product = product;
     }
 
-    public Receive getReceive() {
-        return receive;
+    public Recevie getRecevie() {
+        return recevie;
     }
 
-    public void setReceive(Receive receive) {
-        this.receive = receive;
+    public void setRecevie(Recevie recevie) {
+        this.recevie = recevie;
     }
 }
 

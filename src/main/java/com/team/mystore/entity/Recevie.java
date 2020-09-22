@@ -8,21 +8,21 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "receive")
-public class Receive {
+@Table(name = "recevie")
+public class Recevie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "receiveId")
+    @Column(name = "recevie_id")
     private Integer receiveId;
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    @Column(name = "creatDate")
+    @Column(name = "creat_date")
     private Date creatDate;
-    @Column(name = "priceTotal")
+    @Column(name = "price_total")
     private Integer priceTotal;
     @ManyToOne()
-    @JoinColumn(name = "employeeId")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
-    @OneToMany(mappedBy = "receive",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recevie",fetch = FetchType.LAZY)
     private List<RecevieDetail> recevieDetails= new ArrayList<>();
 
     public Integer getReceiveId() {

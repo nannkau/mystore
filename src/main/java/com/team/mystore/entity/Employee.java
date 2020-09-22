@@ -12,27 +12,27 @@ import java.util.List;
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employeeId")
+    @Column(name = "employee_id")
     private Integer employeeId;
     @Column(name = "name",length = 100)
     private String name;
-    @Column(name = "phoneNumber",length = 15)
+    @Column(name = "phone_number",length = 12)
     private String phoneNumber;
-    @Column(name = "idNo",length = 15)
+    @Column(name = "id_no",length = 20)
     private String idNo;
-    @Column(name = "address",length = 100)
+    @Column(name = "address")
     private String address;
     @DateTimeFormat(pattern ="dd/MM/yyyy")
-    @Column(name = "birthDate")
+    @Column(name = "birth_date")
     private String birthDate;
-    @Column(name = "flagDelete", nullable = false)
-    private String flagDelete;
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @OneToOne(mappedBy = "employee")
     private User user;
     @OneToMany(mappedBy = "employee")
     private List<Invoice> invoices= new ArrayList<>();
     @OneToMany(mappedBy = "employee")
-    private List<Receive> receives= new ArrayList<>();
+    private List<Recevie> recevies = new ArrayList<>();
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -98,19 +98,19 @@ public class Employee implements Serializable {
         this.invoices = invoices;
     }
 
-    public List<Receive> getReceives() {
-        return receives;
+    public List<Recevie> getRecevies() {
+        return recevies;
     }
 
-    public void setReceives(List<Receive> receives) {
-        this.receives = receives;
+    public void setRecevies(List<Recevie> recevies) {
+        this.recevies = recevies;
     }
 
-    public String getFlagDelete() {
-        return flagDelete;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagDelete(String flagDelete) {
-        this.flagDelete = flagDelete;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

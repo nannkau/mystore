@@ -11,19 +11,19 @@ import java.util.List;
 public class Invoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "invoiceId")
+    @Column(name = "invoice_id")
     private Integer invoiceId;
-    @Column(name = "createDate")
+    @Column(name = "create_date")
     private Date createDate;
-    @Column(name = "priceTotal")
+    @Column(name = "price_total")
     private Integer priceTotal;
-    @Column(name = "flagCancel", nullable = false)
-    private String flagCancel;
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @ManyToOne
-    @JoinColumn(name = "employeeId")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
     @ManyToOne
-    @JoinColumn(name = "consumerId")
+    @JoinColumn(name = "consumer_id")
     private Consumer consumer;
     @OneToMany(mappedBy = "invoice")
     private List<InvoiceDetail> invoiceDetails= new ArrayList<>();
@@ -76,11 +76,11 @@ public class Invoice implements Serializable {
         this.invoiceDetails = invoiceDetails;
     }
 
-    public String getFlagCancel() {
-        return flagCancel;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagCancel(String flagCancel) {
-        this.flagCancel = flagCancel;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

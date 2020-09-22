@@ -10,14 +10,12 @@ import javax.persistence.*;
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "categoryId" )
+    @Column(name = "category_id" )
     private int categoryId;
-
     @Column(name = "name",length = 100)
     private String name;
-    @Column(name = "flagDelete", nullable = false)
-    private String flagDelete;
-
+    @Column(name = "status", nullable = false,length = 1)
+    private String status;
     @OneToMany(mappedBy="category", cascade=CascadeType.ALL)
     List<Product> products;
 
@@ -46,12 +44,12 @@ public class Category implements Serializable {
         this.products = products;
     }
 
-    public String getFlagDelete() {
-        return flagDelete;
+    public String getStatus() {
+        return status;
     }
 
-    public void setFlagDelete(String flagDelete) {
-        this.flagDelete = flagDelete;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
