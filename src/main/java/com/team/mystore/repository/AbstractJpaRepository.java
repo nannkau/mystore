@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractJpaDao < T extends Serializable>{
+public abstract class AbstractJpaRepository< T extends Serializable> implements IGenericRepository<T> {
     private Class< T > clazz;
 
     @PersistenceContext
@@ -23,7 +23,7 @@ public abstract class AbstractJpaDao < T extends Serializable>{
                 .getResultList();
     }
 
-    public void save( T entity ){
+    public void create( T entity ){
         entityManager.persist( entity );
     }
 
