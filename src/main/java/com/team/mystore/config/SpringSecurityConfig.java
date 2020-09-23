@@ -30,12 +30,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/staff").hasAnyAuthority("staff","admin")
                 .antMatchers("/admin").hasAnyAuthority("admin")
                 .antMatchers("/").permitAll()
+                .antMatchers("/category/*").permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessdenied")
                 .and()
                 .formLogin()
-                //.loginPage("/login")
 
 
         ;

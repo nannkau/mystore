@@ -31,11 +31,6 @@ public class HomeController {
     public String accessdenied(){
         return "accessdenied";
     }
-    @RequestMapping(value = {"/login"})
-    public String login(){
-        return "login";
-    }
-
 
 
 }
