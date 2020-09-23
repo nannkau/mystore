@@ -1,7 +1,9 @@
 package com.team.mystore.dto;
 
+import com.team.mystore.entity.Role;
 import com.team.mystore.entity.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -20,9 +22,14 @@ public class MyUserDetail  implements UserDetails {
         this.userName= user.getUsername();
         this.passsword=user.getPassword();
         this.active=user.getFlagDelete();
-        List<String> role= new ArrayList<>();
-        user.getRoles().forEach(i -> role.add(i.getName()));
-        this.authorites= (List)role;
+        List<GrantedAuthority> role= new ArrayList<>();
+        //user.getRoles().forEach(i -> role.add(i.getName()));
+
+        for(Role i:user.getRoles()){
+            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(i.getName());
+            role.add(simpleGrantedAuthority);
+        }
+        this.authorites= role;
         this.email=user.getEmail();
 
 
