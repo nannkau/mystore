@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-    //@Qualifier("")
+    @Qualifier("myUserDetailService")
     @Autowired
     UserDetailsService userDetailsService;
     @Override
@@ -27,6 +27,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/seller").hasAnyAuthority("admin","seller")
                 .antMatchers("/staff").hasAnyAuthority("staff","admin")
                 .antMatchers("/admin").hasAnyAuthority("admin")
                 .antMatchers("/").permitAll()
