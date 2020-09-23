@@ -67,7 +67,7 @@ public class MyUserDetail  implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.active.equals("1")?true:false;
+        return this.active.equals("0")?true:false;
     }
     public String getEmail() {
         return email;

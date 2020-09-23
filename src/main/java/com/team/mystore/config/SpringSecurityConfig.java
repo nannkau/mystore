@@ -27,11 +27,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/seller").hasAnyAuthority("admin","seller")
-                .antMatchers("/staff").hasAnyAuthority("staff","admin")
-                .antMatchers("/admin").hasAnyAuthority("admin")
-                .antMatchers("/").permitAll()
-                .antMatchers("/category/*").permitAll()
+                .antMatchers("/seller/**").hasAnyAuthority("admin","seller")
+                .antMatchers("/staff/**").hasAnyAuthority("staff","admin")
+                .antMatchers("/admin/**").hasAnyAuthority("admin")
+                .antMatchers("/**","/register").permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessdenied")

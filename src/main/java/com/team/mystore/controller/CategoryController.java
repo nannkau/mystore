@@ -1,6 +1,5 @@
 package com.team.mystore.controller;
 
-import com.team.mystore.dto.CategoryDto;
 import com.team.mystore.entity.Category;
 import com.team.mystore.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -8,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
 
 @Controller
 public class CategoryController {
@@ -25,7 +22,7 @@ public class CategoryController {
         return "category/index";
     }
 
-    @RequestMapping(value = "category/add.html")
+    @RequestMapping(value = "/category/add.html")
     public String add(Model model){
         Category category= new Category();
         model.addAttribute("category",category);
