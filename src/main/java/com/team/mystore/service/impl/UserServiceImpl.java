@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> findAll() {
         List<UserDto> userDtoList = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
         userRepository.findAll().forEach(user -> {
-            ModelMapper modelMapper = new ModelMapper();
             UserDto userDto = modelMapper.map(user, UserDto.class);
             userDtoList.add(userDto);
                 }
@@ -28,13 +28,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User add(User category) {
-        return null;
+    public User add(UserDto user) {
+        ModelMapper modelMapper = new ModelMapper();
+        User userEntity = modelMapper.map(user, User.class);
+        return userRepository.save(userEntity);
     }
 
     @Override
-    public User update(User category) {
-        return null;
+    public User update(UserDto user) {
+        ModelMapper modelMapper = new ModelMapper();
+        User userEntity = modelMapper.map(user, User.class);
+        return userRepository.save(userEntity);
     }
 
     @Override
