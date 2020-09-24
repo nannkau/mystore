@@ -1,10 +1,14 @@
 package com.team.mystore.service;
 
 import com.team.mystore.entity.Product;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
-    List<Product> findAll();
+    public List<Product> findAll();
+    public Product save(Product product);
+    public void deleteById(Integer id);
+    public Product findById(Integer id);
+
 }
