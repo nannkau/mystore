@@ -24,7 +24,7 @@ public class CategoryController {
         return "category/index";
     }
 
-    @RequestMapping(value = "category/add.html")
+    @RequestMapping(value = "/category/add.html")
     public String add(Model model){
         Category category= new Category();
         model.addAttribute("category",category);

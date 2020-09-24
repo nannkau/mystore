@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/flagments/header::header">
-        <title>Category</title>
+        <title>Title</title>
     </th:block>
 </head>
 <body class="materialdesign">
@@ -18,7 +18,7 @@
                             <div class="main-sparkline13-hd">
                                 <h1>Category<span class="table-project-n"></span> Table</h1>
                                 <div class="sparkline13-outline-icon">
-                                    <a th:href="@{/category/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
+                                    <a th:href="@{/admin/user/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
                                 </div>
                             </div>
                         </div>
@@ -36,21 +36,31 @@
                                     <tr>
                                         <th data-checkbox="true"></th>
                                         <th data-field="id">ID</th>
-                                        <th data-field="name" >Name</th>
+                                        <th data-field="username" >User Name</th>
+                                        <th data-field="password" >PassWord</th>
+                                        <th data-field="email" >Email</th>
                                         <th data-field="status" >Status</th>
                                         <th >Action</th>
                                     </tr>
                                     </thead>
                                     <tbody >
-                                    <tr th:each=" category :${categories}">
+                                    <tr th:each=" user :${users}">
                                         <td></td>
-                                        <td th:text="${category.categoryId}">id</td>
-                                        <td th:text="${category.name}">name</td>
-                                        <td th:text="${category.status=='0'? 'active':'not active'}">status</td>
+                                        <td th:text="${user.getUserId()}">Id</td>
+                                        <td th:text="${user.getUserName()}">User Name</td>
+                                        <td th:text="${user.getPassword()}">Password</td>
+                                        <td th:text="${user.getEmail()}">Email</td>
+                                        <td >
+                                            <p style ="color: blue;" th:style = "${user.getFlagDelete()=='0'} ? 'color: blue' : 'color: red' " th:text="${user.getFlagDelete()=='0'? 'active':'not active'}">
+                                                    active
+                                            </p>
+                                        </td>
+
+
                                         <td>
                                             <div class="btn-group project-list-action">
-                                                <a th:href="@{'/category/edit/' + ${category.categoryId}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
-                                                <a th:href="@{'/category/delete/' + ${category.categoryId}}"><button class="btn btn-white btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
+                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.getUserId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.getUserId()}}"><button class="btn btn-white btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
                                             </div>
                                         </td>
 
