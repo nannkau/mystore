@@ -1,6 +1,5 @@
 package com.team.mystore.service.impl;
 
-import com.team.mystore.dto.CategoryDto;
 import com.team.mystore.dto.UserDto;
 import com.team.mystore.entity.User;
 import com.team.mystore.repository.UserRepository;

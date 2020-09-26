@@ -5,9 +5,15 @@
     <th:block th:replace="/flagments/header::header">
         <title>Add user</title>
     </th:block>
+
 </head>
 <body class="materialdesign">
 <th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+<style>
+    .mul-select{
+        width: 100%;
+    }
+</style>
 
 <div class="basic-form-area mg-b-15">
     <div class="container-fluid">
@@ -16,7 +22,7 @@
                 <div class="sparkline12-list shadow-reset mg-t-30">
                     <div class="sparkline12-hd">
                         <div class="main-sparkline12-hd">
-                            <h1>Add category</h1>
+                            <h1>Add user</h1>
                             <div class="sparkline12-outline-icon">
                                 <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
                                 <span><i class="fa fa-wrench"></i></span>
@@ -28,9 +34,161 @@
                         <div class="basic-login-form-ad">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="all-form-element-inner"><
+                                    <div class="all-form-element-inner">
+                                        <form  th:action="@{/admin/user/add.html}" th:object="${items}" method="post" enctype="multipart/form-data">
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">User Name</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="name" th:field="*{pojo.username}" class="form-control" name="username" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">PassWord</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="price" th:field="*{pojo.password}" class="form-control" name="password" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Email</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="amountTotal" th:field="*{pojo.email}" class="form-control" name="email" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Roles</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="roles"  th:field="*{pojo.roles}" multiple>
+                                                                <option th:each="obj : ${roles}"
+                                                                        th:value="${obj.getId()}"
+                                                                        th:text="${obj.getName()}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Employee</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="employee"  th:field="*{employee}" >
+                                                                <option th:each="em : ${employees}"
+                                                                        th:value="${em.getEmployeeId()}"
+                                                                        th:text="${em.getName()}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <p>
+                                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                                Add employee
+                                                            </a>
+                                                        </p>
+                                                        <div class="collapse" id="collapseExample">
+                                                            <div class="card card-body">
+                                                                <div class="form-group-inner">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="login2 pull-right pull-right-pro">Full Name</label>
+                                                                        </div>
+                                                                        <div class="col-lg-9">
+                                                                            <input type="text" id="Ename"  class="form-control" name="Ename" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group-inner">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="login2 pull-right pull-right-pro">Phone</label>
+                                                                        </div>
+                                                                        <div class="col-lg-9">
+                                                                            <input type="text" id="phone"  class="form-control" name="phone" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group-inner">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="login2 pull-right pull-right-pro">CMND</label>
+                                                                        </div>
+                                                                        <div class="col-lg-9">
+                                                                            <input type="text" id="cmnd"  class="form-control" name="cmnd" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group-inner">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="login2 pull-right pull-right-pro">Địa chỉ</label>
+                                                                        </div>
+                                                                        <div class="col-lg-9">
+                                                                            <input type="text" id="address"  class="form-control" name="address" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group-inner">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="login2 pull-right pull-right-pro">Ngày sinh </label>
+                                                                        </div>
+                                                                        <div class="col-lg-9">
+                                                                            <input type="date" id="birthday"  class="form-control" name="birthday" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Status</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="flagDelete" th:field="*{pojo.flagDelete}">
+                                                                <option value="0">Active</option>
+                                                                <option value="1">Not Active</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="form-group-inner">
+                                                <div class="login-btn-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3"></div>
+                                                        <div class="col-lg-9">
+                                                            <div class="login-horizental cancel-wp pull-left">
+                                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +201,36 @@
         </div>
     </div>
 </div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 ml-auto">.col-md-3 .ml-auto</div>
+            <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ml-auto">.col-md-6 .ml-auto</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                Level 1: .col-sm-9
+                <div class="row">
+                    <div class="col-8 col-sm-6">
+                        Level 2: .col-8 .col-sm-6
+                    </div>
+                    <div class="col-4 col-sm-6">
+                        Level 2: .col-4 .col-sm-6
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <th:block th:replace="/flagments/footer::footer"></th:block>
 </body>
 </html>

@@ -1,23 +1,27 @@
 package com.team.mystore.controller;
 
-import com.team.mystore.dto.UserDto;
+import com.team.mystore.Command.UserCommand;
 import com.team.mystore.entity.User;
+import com.team.mystore.service.EmployeeService;
+import com.team.mystore.service.RoleService;
 import com.team.mystore.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
-    @Autowired
-    UserService userService;
 
-    public UserController(UserService userService) {
+    private final UserService userService;
+    private final RoleService roleService;
+    private final EmployeeService employeeService;
+
+    public UserController(UserService userService, RoleService roleService, EmployeeService employeeService) {
         this.userService = userService;
+        this.roleService=roleService;
+        this.employeeService=employeeService;
     }
 
     @RequestMapping(value = "/admin/user.html")
@@ -27,18 +31,19 @@ public class UserController {
     }
     @RequestMapping(value = "/admin/user/add.html")
     public String add(Model model){
-        UserDto userDto= new UserDto();
-        model.addAttribute("userDto",userDto);
+        UserCommand command= new UserCommand();
+        model.addAttribute("roles",roleService.findByFlagDelete("0"));
+        model.addAttribute("employees",employeeService.findEmployeeNotExistAccount());
+        model.addAttribute("items",command);
         return "admin/add";
     }
-    @RequestMapping(value = "/admin/add.html",method = RequestMethod.POST)
-    public String add(UserDto userDto, Model model, BindingResult result){
+    @RequestMapping(value = "/admin/user/add.html",method = RequestMethod.POST)
+    public String add(UserCommand userCommand, Model model, BindingResult result){
         if (result.hasErrors()) {
             return "admin/add";
         }
-        if(!userDto.getUserName().equals("")){
-            userService.add(userDto);
-        }
+        User user = new User();;
+        user = userCommand.getPojo();
         return "redirect:admin/user.html";
     }
 }
