@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    @Autowired
-    UserRepository userRepository;
+
     @RequestMapping(value = {"/","index.html"})
     public String index(){
         return "home";

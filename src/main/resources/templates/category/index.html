@@ -46,7 +46,11 @@
                                         <td></td>
                                         <td th:text="${category.categoryId}">id</td>
                                         <td th:text="${category.name}">name</td>
-                                        <td th:text="${category.status=='0'? 'active':'not active'}">status</td>
+                                        <td >
+                                        <p  th:style = "${category.getStatus()=='0'} ? 'color: blue' : 'color: red' " th:text="${category.getStatus()=='0'? 'active':'not active'}">
+                                                active
+                                        </p>
+                                        </td>
                                         <td>
                                             <div class="btn-group project-list-action">
                                                 <a th:href="@{'/category/edit/' + ${category.categoryId}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
