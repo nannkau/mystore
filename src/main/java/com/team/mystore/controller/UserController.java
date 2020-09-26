@@ -40,12 +40,12 @@ public class UserController {
     @RequestMapping(value = "/admin/user/add.html",method = RequestMethod.POST)
     public String add(UserCommand userCommand, Model model, BindingResult result){
         if (result.hasErrors()) {
-            return "admin/add";
+            return "admin/add.html?error=can_not_insert";
         }
         User user = new User();;
         user = userCommand.getPojo();
         userService.add(user);
 
-        return "redirect:";
+        return "redirect:admin/user.html?success=insert_success";
     }
 }
