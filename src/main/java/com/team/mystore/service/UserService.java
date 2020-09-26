@@ -6,9 +6,9 @@ import com.team.mystore.entity.User;
 import java.util.List;
 
 public interface UserService {
-    public List<UserDto> findAll();
-    public User add(UserDto category);
-    public User update(UserDto category);
+    public List<User> findAll();
+    public User add(User category);
+    public User update(User category);
     public void deleteById(Integer id);
 
 }

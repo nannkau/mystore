@@ -44,6 +44,8 @@ public class UserController {
         }
         User user = new User();;
         user = userCommand.getPojo();
-        return "redirect:admin/user.html";
+        userService.add(user);
+
+        return "redirect:";
     }
 }

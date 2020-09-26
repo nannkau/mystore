@@ -6,6 +6,7 @@ import com.team.mystore.repository.UserRepository;
 import com.team.mystore.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,30 +15,25 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Override
-    public List<UserDto> findAll() {
-        List<UserDto> userDtoList = new ArrayList<>();
-        ModelMapper modelMapper = new ModelMapper();
-        userRepository.findAll().forEach(user -> {
-            UserDto userDto = modelMapper.map(user, UserDto.class);
-            userDtoList.add(userDto);
-                }
-        );
-        return userDtoList;
+    public List<User> findAll() {
+
+        return userRepository.findAll();
     }
 
     @Override
-    public User add(UserDto user) {
-        ModelMapper modelMapper = new ModelMapper();
-        User userEntity = modelMapper.map(user, User.class);
-        return userRepository.save(userEntity);
+    public User add(User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override
-    public User update(UserDto user) {
-        ModelMapper modelMapper = new ModelMapper();
-        User userEntity = modelMapper.map(user, User.class);
-        return userRepository.save(userEntity);
+    public User update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override
