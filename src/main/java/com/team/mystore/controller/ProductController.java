@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.*;
 
 @Controller
@@ -45,20 +46,27 @@ public class ProductController {
         return "product/add";
     }
     @RequestMapping(value = "product/add.html",method = RequestMethod.POST)
-    public String add(ProductCommand command, Model model, BindingResult result,HttpServletRequest request) throws IOException {
-        if (result.hasErrors()) {
-            return "product/add";
-        }
+    public String add(@Valid ProductCommand command, BindingResult result, HttpServletRequest request) throws IOException {
         Product product= new Product();
         product=command.getPojo();
         String path = request.getServletContext().getRealPath("/upload/");
-        product.setImage(upload(command.getPart(),request,path));
-        productService.save(command.getPojo());
+        product.setImage(upload(command.getPart(),request,outdir));
+        if (result.hasErrors()) {
+            return "product/add";
+        }
+
+        else {
+
+            productService.save(product);
+        }
+
+
         return "redirect:/product/index.html";
     }
     @RequestMapping(value = "/product/edit/{id}")
     public String edit(Model model,@PathVariable("id") Integer id){
         ProductCommand command= new ProductCommand();
+        model.addAttribute("categorys",categoryService.findByStatus("0"));
         command.setPojo(productService.findById(id));
         model.addAttribute("items",command);
         return "product/edit";
@@ -68,7 +76,6 @@ public class ProductController {
         System.out.println("uploadRootPath=" + path);
 
         File uploadRootDir = new File(path);
-        // Tạo thư mục gốc upload nếu nó không tồn tại.
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }

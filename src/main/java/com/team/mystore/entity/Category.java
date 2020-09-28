@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="category")
@@ -12,8 +15,10 @@ public class Category implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "category_id" )
     private int categoryId;
+    @NotEmpty(message = "not empty value")
     @Column(name = "name",length = 100)
     private String name;
+    @NotEmpty
     @Column(name = "status", nullable = false,length = 1)
     private String status;
     @OneToMany(mappedBy="category", cascade=CascadeType.ALL)
