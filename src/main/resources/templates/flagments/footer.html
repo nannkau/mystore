@@ -78,6 +78,16 @@
     <!-- main JS
         ============================================ -->
     <script th:src="@{/js/main.js}"></script>
+
+    <script >
+        $("#success-alert").fadeTo(2000, 3000).slideUp(3000, function(){
+            $("#success-alert").slideUp(3000);
+        });
+        $("#error-alert").fadeTo(2000, 3000).slideUp(3000, function(){
+            $("#error-alert").slideUp(3000);
+        });
+
+    </script>
 </th:block>
 
 </body>

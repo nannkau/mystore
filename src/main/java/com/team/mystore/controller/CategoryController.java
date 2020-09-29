@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+
 @Controller
 public class CategoryController {
 
@@ -31,11 +33,11 @@ public class CategoryController {
         return "category/add";
     }
     @RequestMapping(value = "category/add.html",method = RequestMethod.POST)
-    public String add(Category category, Model model, BindingResult result){
+    public String add(@Valid Category category, BindingResult result){
         if (result.hasErrors()) {
             return "category/add";
         }
-        if(!category.getName().equals("")){
+        else {
         categoryService.save(category);
         }
         return "redirect:/category/index.html";

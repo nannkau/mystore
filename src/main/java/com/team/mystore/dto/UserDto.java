@@ -32,9 +32,6 @@ public class UserDto {
         this.email = email;
     }
 
-
-
-
     public int getUserId() {
         return userId;
     }

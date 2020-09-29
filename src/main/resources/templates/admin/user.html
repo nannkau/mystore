@@ -2,12 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/flagments/header::header">
-        <title>Title</title>
+        <title>User</title>
     </th:block>
 </head>
 <body class="materialdesign">
 <th:block th:replace="/flagments/sidebar::sidebar"></th:block>
-
+<!--<div class="row" id="success-alert">-->
+<!--    <div class="col-lg-12">-->
+<!--        <div class="col-lg-6 alert alert-success">-->
+<!--            ok-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="admin-dashone-data-table-area">
     <div class="data-table-area mg-b-15">
         <div class="container-fluid">
@@ -16,11 +22,22 @@
                     <div class="sparkline13-list shadow-reset">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h1>Category<span class="table-project-n"></span> Table</h1>
+                                <h1>User<span class="table-project-n"></span> Table</h1>
                                 <div class="sparkline13-outline-icon">
                                     <a th:href="@{/admin/user/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
                                 </div>
+                                </div>
                             </div>
+                        <div class="col-lg-7" id="success-alert" th:if="${#httpServletRequest.getParameter('success') != null}" >
+                            <div class="col-lg-6 alert alert-success" th:text="${#httpServletRequest.getParameter('success')}">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-7" id="error-alert" th:if="${#httpServletRequest.getParameter('error') != null}" >
+                            <div class="col-lg-6 alert alert-danger" th:text="${#httpServletRequest.getParameter('error')}">
+
+                            </div>
+                        </div>
                         </div>
                         <div class="sparkline13-graph">
                             <div class="datatable-dashv1-list custom-datatable-overright">
@@ -39,6 +56,7 @@
                                         <th data-field="username" >User Name</th>
                                         <th data-field="password" >PassWord</th>
                                         <th data-field="email" >Email</th>
+                                        <th data-field="role" >Role</th>
                                         <th data-field="status" >Status</th>
                                         <th >Action</th>
                                     </tr>
@@ -46,12 +64,19 @@
                                     <tbody >
                                     <tr th:each=" user :${users}">
                                         <td></td>
-                                        <td th:text="${user.getUserId()}">Id</td>
-                                        <td th:text="${user.getUserName()}">User Name</td>
-                                        <td th:text="${user.getPassword()}">Password</td>
-                                        <td th:text="${user.getEmail()}">Email</td>
+                                        <td th:text="${user.id}">Id</td>
+                                        <td th:text="${user.username}">User Name</td>
+                                        <td th:text="${user.password}">Password</td>
+                                        <td th:text="${user.email}">Email</td>
                                         <td >
-                                            <p style ="color: blue;" th:style = "${user.getFlagDelete()=='0'} ? 'color: blue' : 'color: red' " th:text="${user.getFlagDelete()=='0'? 'active':'not active'}">
+                                            <div th:each="role : ${user.roles}"  th:switch="${role.name}">
+                                                <span th:case="'admin'" th:style = "'color: white;background-color:green;' " >admin</span>
+                                                <span th:case="'staff'" th:style = "'color: white;background-color: CornflowerBlue;' ">staff</span>
+                                                <span th:case="'seller'" th:style = "'color: white;background-color: lightblue;' ">seller</span>
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <p style ="color: blue;" th:style = "${user.getFlagDelete()=='0'} ? 'color: blue' : 'color: red' " th:text="${user.flagDelete=='0'? 'active':'not active'}">
                                                     active
                                             </p>
                                         </td>
@@ -59,8 +84,8 @@
 
                                         <td>
                                             <div class="btn-group project-list-action">
-                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.getUserId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
-                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.getUserId()}}"><button class="btn btn-white btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
+                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.id}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <a th:href="@{'/admin/user.html?action=edit&id=' + ${user.id}}"><button class="btn btn-white btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
                                             </div>
                                         </td>
 
@@ -76,5 +101,6 @@
     </div>
 </div>
 <th:block th:replace="/flagments/footer::footer"></th:block>
+
 </body>
 </html>
