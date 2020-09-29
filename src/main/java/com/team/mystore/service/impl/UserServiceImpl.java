@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Integer id) {
 
     }
+
+    @Override
+    public User findById(int id) {
+        return null;
+    }
 }
