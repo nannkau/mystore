@@ -5,6 +5,7 @@
     <th:block th:replace="/flagments/header::header">
         <title>Edit user</title>
     </th:block>
+
 </head>
 <body class="materialdesign">
 <th:block th:replace="/flagments/sidebar::sidebar"></th:block>
@@ -16,7 +17,7 @@
                 <div class="sparkline12-list shadow-reset mg-t-30">
                     <div class="sparkline12-hd">
                         <div class="main-sparkline12-hd">
-                            <h1>Add category</h1>
+                            <h1>Edit user</h1>
                             <div class="sparkline12-outline-icon">
                                 <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
                                 <span><i class="fa fa-wrench"></i></span>
@@ -29,8 +30,113 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="all-form-element-inner">
+                                        <form  th:action="@{/admin/user/edit.html}" th:object="${items}" method="post" enctype="multipart/form-data">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-3"></div>
+                                                <div class="col-lg-9" id="success-alert" th:if="${#httpServletRequest.getParameter('success') != null}" >
+                                                    <div class="col-lg-6 alert alert-success" th:text="${#httpServletRequest.getParameter('success')}">
 
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9" id="error-alert" th:if="${#httpServletRequest.getParameter('error') != null}" >
+                                                    <div class="col-lg-6 alert alert-danger" th:text="${#httpServletRequest.getParameter('error')}">
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">User Name</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="name" th:field="*{pojo.username}" class="form-control" th:text="*{pojo.username}" name="username"  required="required" pattern="[a-z]{1,15}"
+                                                               title="Username should only contain lowercase letters. e.g. john"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">PassWord</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="price" th:field="*{pojo.password}" class="form-control" name="password" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Email</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="text" id="amountTotal" th:field="*{pojo.email}" th:text="*{pojo.email}" class="form-control" name="email" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Roles</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="roles"  th:field="*{pojo.roles}" multiple>
+                                                                <option th:each="obj : ${roles}"
+                                                                        th:value="${obj.getId()}"
+                                                                        th:text="${obj.getName()}" th:selected="obj.name == pojo.roles.name"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Employee</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="employee"  th:field="*{pojo.employee}" >
+                                                                <option th:each="em : ${employees}"
+                                                                        th:value="${em.getEmployeeId()}"
+                                                                        th:text="${em.getName()}" ></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <label class="login2 pull-right pull-right-pro">Status</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="form-select-list">
+                                                            <select class="form-control custom-select-value" name="flagDelete" th:field="*{pojo.flagDelete}">
+                                                                <option th:selected="" value="0">Active</option>
+                                                                <option value="1">Not Active</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group-inner">
+                                                <div class="login-btn-inner">
+                                                    <div class="row">
+                                                        <div class="col-lg-3"></div>
+                                                        <div class="col-lg-9">
+                                                            <div class="login-horizental cancel-wp pull-left">
+                                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +149,7 @@
         </div>
     </div>
 </div>
+
 <th:block th:replace="/flagments/footer::footer"></th:block>
 </body>
 </html>
