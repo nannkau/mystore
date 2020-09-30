@@ -10,5 +10,6 @@ public interface UserService {
     public User add(User category);
     public User update(User category);
     public void deleteById(Integer id);
+    public User findById(int id);
 
 }

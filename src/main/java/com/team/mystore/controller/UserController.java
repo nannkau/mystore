@@ -1,5 +1,6 @@
 package com.team.mystore.controller;
 
+import com.team.mystore.Command.ProductCommand;
 import com.team.mystore.Command.UserCommand;
 import com.team.mystore.entity.User;
 import com.team.mystore.service.EmployeeService;
@@ -8,8 +9,10 @@ import com.team.mystore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -40,12 +43,43 @@ public class UserController {
     @RequestMapping(value = "/admin/user/add.html",method = RequestMethod.POST)
     public String add(UserCommand userCommand, Model model, BindingResult result){
         if (result.hasErrors()) {
-            return "admin/add.html?error=can_not_insert";
+            return "/admin/user/add.html";
         }
-        User user = new User();;
-        user = userCommand.getPojo();
-        userService.add(user);
+        try{
+            User user = new User();
+            user = userCommand.getPojo();
+            userService.add(user);
+        }catch (Exception e){
+            return "redirect:/admin/user/add.html?error=can_not_insert";
+        }
 
-        return "redirect:admin/user.html?success=insert_success";
+
+        return "redirect:/admin/user.html?success=insert_success";
     }
+    @RequestMapping(value = "/admin/user/edit.html")
+    public String edit(Model model,@RequestParam("id") Integer id){
+        UserCommand command= new UserCommand();
+        command.setPojo(userService.findById(id));
+        model.addAttribute("roles",roleService.findByFlagDelete("0"));
+        model.addAttribute("employees",employeeService.findEmployeeNotExistAccount());
+        model.addAttribute("items",command);
+        return "admin/edit";
+    }
+    @RequestMapping(value = "/admin/user/edit.html",method = RequestMethod.POST)
+    public String edit(UserCommand userCommand, Model model, BindingResult result){
+        if (result.hasErrors()) {
+            return "/admin/user/edit.html?id="+userCommand.getPojo().getId();
+        }
+        try{
+            User user = new User();
+            user = userCommand.getPojo();
+            userService.update(user);
+        }catch (Exception e){
+            return "redirect:/admin/user/edit.html?id="+userCommand.getPojo().getId()+"error=can_not_insert";
+        }
+
+
+        return "redirect:/admin/user.html?success=edit_success";
+    }
+
 }
