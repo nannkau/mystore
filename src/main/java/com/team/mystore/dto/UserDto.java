@@ -20,7 +20,6 @@ public class UserDto {
     public String getFlagDelete() {
         return flagDelete;
     }
-
     public void setFlagDelete(String flagDelete) {
         this.flagDelete = flagDelete;
     }
