@@ -39,7 +39,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-9" id="error-alert" th:if="${#httpServletRequest.getParameter('error') != null}" >
-                                                <div class="col-lg-6 alert alert-danger" th:text="${#httpServletRequest.getParameter('error')}">
+                                                <div class="col-lg-6 alert alert-danger" th:text="#{error.insert}">
 
                                                 </div>
                                             </div>
@@ -49,7 +49,7 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">User Name</label>
                                                     </div>
-                                                    <div class="col-lg-9">
+                                                    <div class="col-lg-7">
                                                         <input type="text" id="name" th:field="*{pojo.username}" class="form-control" name="username"  required="required" pattern="[a-z]{1,15}"
                                                                title="Username should only contain lowercase letters. e.g. john"/>
                                                     </div>
@@ -60,8 +60,9 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">PassWord</label>
                                                     </div>
-                                                    <div class="col-lg-9">
+                                                    <div class="col-lg-7">
                                                         <input type="text" id="price" th:field="*{pojo.password}" class="form-control" name="password" />
+                                                        <input type="checkbox" onclick="myFunction()">Show Password
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,7 +71,7 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">Email</label>
                                                     </div>
-                                                    <div class="col-lg-9">
+                                                    <div class="col-lg-7">
                                                         <input type="text" id="amountTotal" th:field="*{pojo.email}" class="form-control" name="email" />
                                                     </div>
                                                 </div>
@@ -80,7 +81,7 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">Roles</label>
                                                     </div>
-                                                    <div class="col-lg-9">
+                                                    <div class="col-lg-7">
                                                         <div class="form-select-list">
                                                             <select class="form-control custom-select-value" name="roles"  th:field="*{pojo.roles}" multiple>
                                                                 <option th:each="obj : ${roles}"
@@ -96,15 +97,16 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">Employee</label>
                                                     </div>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-4">
                                                         <div class="form-select-list">
-                                                            <select class="form-control custom-select-value" name="employee"  th:field="*{pojo.employee}" >
+                                                            <select class="form-control custom-select-value" name="employee" required="required" th:field="*{pojo.employee}" >
                                                                 <option th:each="em : ${employees}"
                                                                         th:value="${em.getEmployeeId()}"
                                                                         th:text="${em.getName()}"></option>
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-3"><a href="">Add employee</a></div>
 <!--                                                    <div class="col-lg-6">-->
 <!--                                                        <p>-->
 <!--                                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">-->
@@ -174,7 +176,7 @@
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">Status</label>
                                                     </div>
-                                                    <div class="col-lg-9">
+                                                    <div class="col-lg-7">
                                                         <div class="form-select-list">
                                                             <select class="form-control custom-select-value" name="flagDelete" th:field="*{pojo.flagDelete}">
                                                                 <option value="0">Active</option>
@@ -210,6 +212,15 @@
         </div>
     </div>
 </div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
 <th:block th:replace="/flagments/footer::footer"></th:block>
 </body>

@@ -1,15 +1,12 @@
 package com.team.mystore.service.impl;
 
-import com.team.mystore.dto.UserDto;
 import com.team.mystore.entity.User;
 import com.team.mystore.repository.UserRepository;
 import com.team.mystore.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,6 +40,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        return null;
+        return userRepository.findById(id);
     }
 }

@@ -10,4 +10,5 @@ public interface EmployeeService {
     public Employee update(Employee category);
     public void deleteById(Integer id);
     public List<Employee> findEmployeeNotExistAccount();
+    public Employee finEmployeeById(int id);
 }

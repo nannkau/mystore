@@ -1,10 +1,12 @@
 package com.team.mystore.controller;
 
 import com.team.mystore.entity.Category;
+import com.team.mystore.entity.User;
 import com.team.mystore.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +45,7 @@ public class CategoryController {
         return "redirect:/category/index.html";
     }
     @RequestMapping(value = "/category/edit/{id}")
-    public String edit(Model model,@PathVariable("id") Integer id){
+    public String edit(Model model, @PathVariable("id") Integer id){
         model.addAttribute("category",categoryService.findById(id).get());
         return "category/edit";
     }
