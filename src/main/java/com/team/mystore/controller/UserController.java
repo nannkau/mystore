@@ -1,6 +1,5 @@
 package com.team.mystore.controller;
 
-import com.team.mystore.Command.ProductCommand;
 import com.team.mystore.Command.UserCommand;
 import com.team.mystore.entity.Employee;
 import com.team.mystore.entity.User;
@@ -12,9 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,23 +57,35 @@ public class UserController {
 
         return "redirect:/admin/user.html?success=insert_success";
     }
-    }
-        return "redirect:/admin/user.html?success=edit_success";
-            userService.update(userCommand.getPojo());
-        }
-            System.out.println(userCommand.getPojo());
     @RequestMapping(value = "/admin/user/edit.html")
     public String edit(Model model,@RequestParam("id") Integer id){
         UserCommand command= new UserCommand();
-        command.setPojo(userService.findById(id));
-        command.getPojo().setPassword("");
+        User user = userService.findById(id);
+        command.setPojo(user);
+        List<Employee> employees = employeeService.findEmployeeNotExistAccount();
+        employees.add(employeeService.finEmployeeById(user.getEmployee().getEmployeeId()));
+
         model.addAttribute("roles",roleService.findByFlagDelete("0"));
-        return "admin/edit";
-        List<Employee> employees =  employeeService.findEmployeeNotExistAccount();
-        employees.add((command.getPojo().getEmployee()));
         model.addAttribute("employees",employees);
-        System.out.println(command.getPojo());
+
         model.addAttribute("items",command);
+        return "admin/edit";
     }
-    @RequestMapping(value = "/admin/user/edit.html",method = RequestMethod.POST)
+    @RequestMapping(value = "/xa/user/edit.html",method = RequestMethod.POST)
+    public String edit(UserCommand userCommand, Model model, BindingResult result){
+        if (result.hasErrors()) {
+            return "/admin/user/edit.html?id="+userCommand.getPojo().getId();
+        }
+        try{
+            User user = new User();
+            user = userCommand.getPojo();
+            userService.update(user);
+        }catch (Exception e){
+            return "redirect:/admin/user/edit.html?id="+userCommand.getPojo().getId()+"error=can_not_insert";
+        }
+
+
+        return "redirect:/admin/user.html?success=edit_success";
+    }
+
 }
