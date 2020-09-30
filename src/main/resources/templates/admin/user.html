@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                         <div class="col-lg-7" id="success-alert" th:if="${#httpServletRequest.getParameter('success') != null}" >
-                            <div class="col-lg-6 alert alert-success" th:text="${#httpServletRequest.getParameter('success')}">
+                            <div class="col-lg-6 alert alert-success" th:text="#{success.insert}">
 
                             </div>
                         </div>

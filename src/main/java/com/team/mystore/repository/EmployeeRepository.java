@@ -14,5 +14,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
                                     "from user)",
             nativeQuery = true)
     public List<Employee> findEmployeeNotExistAccount();
-
+    public Employee findByEmployeeId(int id);
 }

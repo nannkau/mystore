@@ -2,6 +2,7 @@ package com.team.mystore.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class User implements Serializable {
     private int id;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true )
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
@@ -47,7 +48,7 @@ public class User implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NotEmpty(message = "Name may not be empty")int id) {
         this.id = id;
     }
 
@@ -55,7 +56,7 @@ public class User implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NotEmpty(message = "Email may not be empty")String email) {
         this.email = email;
     }
 
@@ -63,7 +64,7 @@ public class User implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NotEmpty(message = "password may not be empty")String password) {
         this.password = password;
     }
 
@@ -71,7 +72,7 @@ public class User implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(@NotEmpty(message = "username may not be empty")String username) {
         this.username = username;
     }
 
@@ -79,7 +80,7 @@ public class User implements Serializable {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(@NotEmpty(message = "role may not be empty")Set<Role> roles) {
         this.roles = roles;
     }
 

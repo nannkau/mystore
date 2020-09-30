@@ -39,4 +39,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findEmployeeNotExistAccount() {
         return employeeRepository.findEmployeeNotExistAccount();
     }
+
+    @Override
+    public Employee finEmployeeById(int id) {
+        return employeeRepository.findByEmployeeId(id);
+    }
 }
