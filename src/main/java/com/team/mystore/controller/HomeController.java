@@ -19,7 +19,6 @@ public class HomeController {
     public String admin(Model model){
         UserDetails user =(UserDetails) (SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
         user.getUsername();
-        //model.addAttribute("messages", user.getUsername());
 
         return  "redirect:/index.html?q="+user.getUsername();
     }
@@ -28,7 +27,6 @@ public class HomeController {
     public String user(Model model){
         UserDetails user =(UserDetails) (SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
         user.getUsername();
-        //model.addAttribute("messages", user.getUsername());
 
         return  "redirect:/index.html?q="+user.getUsername();
     }
@@ -36,7 +34,6 @@ public class HomeController {
     public String seller(Model model){
         UserDetails user =(UserDetails) (SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
         user.getUsername();
-        //model.addAttribute("messages", user.getUsername());
 
         return  "redirect:/index.html?q="+user.getUsername();
     }

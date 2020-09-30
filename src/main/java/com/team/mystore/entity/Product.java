@@ -1,6 +1,7 @@
 package com.team.mystore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class Product implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NotEmpty(message = "Name may not be empty") String name) {
         this.name = name;
     }
 

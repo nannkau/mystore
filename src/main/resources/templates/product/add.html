@@ -37,6 +37,7 @@
                                                     </div>
                                                     <div class="col-lg-9">
                                                         <input type="text" id="name" th:field="*{pojo.name}" class="form-control" name="name" />
+                                                        <span th:if="${#fields.hasErrors('pojo.name')}" th:errors="*{pojo.name}" class="badge badge-danger left"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,8 +113,8 @@
                                                     <div class="col-lg-9">
                                                         <div class="form-select-list">
                                                             <select class="form-control custom-select-value" name="account" th:field="*{pojo.status}">
-                                                                <option value="1">Active</option>
-                                                                <option value="0">Not Active</option>
+                                                                <option value="0">Active</option>
+                                                                <option value="1">Not Active</option>
                                                             </select>
                                                         </div>
                                                     </div>
