@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Employee</title>
+    </th:block>
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+<div class="admin-dashone-data-table-area">
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>Employee<span class="table-project-n"></span> Table</h1>
+                                <div class="sparkline13-outline-icon">
+                                    <a th:href="@{/admin/employee/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7" id="success-alert" th:if="${#httpServletRequest.getParameter('success') != null}" >
+                            <div class="col-lg-6 alert alert-success" th:text="#{success.insert}">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-7" id="error-alert" th:if="${#httpServletRequest.getParameter('error') != null}" >
+                            <div class="col-lg-6 alert alert-danger" th:text="${#httpServletRequest.getParameter('error')}">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                <tr>
+                                    <th data-field="id">ID</th>
+                                    <th data-field="name" >Name </th>
+                                    <th data-field="phone" >Phone</th>
+                                    <th data-field="personid" >Personal ID</th>
+                                    <th data-field="address" >Address</th>
+                                    <th data-field="birthday" >Birthday</th>
+                                    <th >Action</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <tr th:each=" emp :${employees}">
+                                    <td th:text="${emp.employeeId}"></td>
+                                    <td th:text="${emp.name}"></td>
+                                    <td th:text="${emp.phoneNumber}"></td>
+                                    <td th:text="${emp.idNo}"></td>
+                                    <td th:text="${emp.address}"></td>
+                                    <td th:text="${emp.birthDate}"></td>
+                                    <td>
+                                        <div class="btn-group project-list-action">
+                                            <a th:href="@{'/admin/employee/edit.html?id='+ ${emp.employeeId}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
+                                            <a th:href="@{'/admin/employee/delete.html?id='+ ${emp.employeeId}}"><button class="btn btn-red btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
+                                            <a th:href="@{'/admin/employee/detail.html?id='+ ${emp.employeeId}}"> <button class="btn btn-blue btn-xs"><i class="fa fa-pencil"></i> Detail</button></a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
+
+</body>
+</html>

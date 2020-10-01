@@ -17,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public List<Employee> findAll() {
-        return null;
+        return employeeRepository.findAll();
     }
 
     @Override
@@ -43,5 +43,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee finEmployeeById(int id) {
         return employeeRepository.findByEmployeeId(id);
+    }
+
+    @Override
+    public List<Employee> findEmployeeActive() {
+        return employeeRepository.findEmployeeActive();
     }
 }

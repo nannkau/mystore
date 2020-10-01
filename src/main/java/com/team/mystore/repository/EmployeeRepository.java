@@ -15,4 +15,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             nativeQuery = true)
     public List<Employee> findEmployeeNotExistAccount();
     public Employee findByEmployeeId(int id);
+    @Query(value = "select *" +
+            " from employee " +
+            " where status='0' ", nativeQuery = true)
+    public List<Employee> findEmployeeActive();
 }

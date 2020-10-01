@@ -11,4 +11,5 @@ public interface EmployeeService {
     public void deleteById(Integer id);
     public List<Employee> findEmployeeNotExistAccount();
     public Employee finEmployeeById(int id);
+    public List<Employee> findEmployeeActive();
 }
