@@ -1,9 +1,12 @@
 package com.team.mystore.controller;
 
 import com.team.mystore.Command.ProductCommand;
+import com.team.mystore.dto.ProductDto;
 import com.team.mystore.entity.Product;
 import com.team.mystore.service.CategoryService;
 import com.team.mystore.service.ProductService;
+import com.team.mystore.service.SupplierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +28,12 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
-
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    private final SupplierService supplierService;
+    @Autowired
+    public ProductController(ProductService productService, CategoryService categoryService, SupplierService supplierService) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.supplierService = supplierService;
     }
 
 
@@ -40,24 +45,22 @@ public class ProductController {
 
     @RequestMapping(value = "product/add.html")
     public String add(Model model){
-        ProductCommand command= new ProductCommand();
-        model.addAttribute("categorys",categoryService.findByStatus("1"));
-        model.addAttribute("items",command);
+        ProductDto productDto= new ProductDto();
+        model.addAttribute("categories",categoryService.findByStatus("1"));
+        model.addAttribute("suppliers",supplierService.findByStatus("1"));
+        model.addAttribute("productDto",productDto);
         return "product/add";
     }
     @RequestMapping(value = "product/add.html",method = RequestMethod.POST)
-    public String add(@Valid ProductCommand command, BindingResult result, HttpServletRequest request) throws IOException {
-        Product product= new Product();
-        product=command.getPojo();
-        String path = request.getServletContext().getRealPath("/upload/");
-        product.setImage(upload(command.getPart(),request,outdir));
+    public String add(@Valid ProductDto productDto, BindingResult result, HttpServletRequest request) throws IOException {
+        productDto.setImage(upload(productDto.getPart(),request,outdir));
         if (result.hasErrors()) {
             return "product/add";
         }
 
         else {
 
-            productService.save(product);
+            productService.save(productDto);
         }
 
 
@@ -65,10 +68,9 @@ public class ProductController {
     }
     @RequestMapping(value = "/product/edit/{id}")
     public String edit(Model model,@PathVariable("id") Integer id){
-        ProductCommand command= new ProductCommand();
-        model.addAttribute("categorys",categoryService.findByStatus("0"));
-        command.setPojo(productService.findById(id));
-        model.addAttribute("items",command);
+        model.addAttribute("categories",categoryService.findByStatus("1"));
+        model.addAttribute("suppliers",supplierService.findByStatus("1"));
+        model.addAttribute("productDto",productService.findById(id));
         return "product/edit";
     }
 

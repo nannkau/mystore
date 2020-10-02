@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -59,23 +60,5 @@ public class UserController {
 
         return "redirect:/admin/user.html?success=insert_success";
     }
-    }
-        return "redirect:/admin/user.html?success=edit_success";
-            userService.update(userCommand.getPojo());
-        }
-            System.out.println(userCommand.getPojo());
-    @RequestMapping(value = "/admin/user/edit.html")
-    public String edit(Model model,@RequestParam("id") Integer id){
-        UserCommand command= new UserCommand();
-        command.setPojo(userService.findById(id));
-        command.getPojo().setPassword("");
-        model.addAttribute("roles",roleService.findByFlagDelete("0"));
-        return "admin/edit";
-        List<Employee> employees =  employeeService.findEmployeeNotExistAccount();
-        employees.add((command.getPojo().getEmployee()));
-        model.addAttribute("employees",employees);
-        System.out.println(command.getPojo());
-        model.addAttribute("items",command);
-    }
-    @RequestMapping(value = "/admin/user/edit.html",method = RequestMethod.POST)
+
 }
