@@ -19,6 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class ProductController {
@@ -46,8 +50,8 @@ public class ProductController {
     @RequestMapping(value = "product/add.html")
     public String add(Model model){
         ProductDto productDto= new ProductDto();
-        model.addAttribute("categories",categoryService.findByStatus("1"));
-        model.addAttribute("suppliers",supplierService.findByStatus("1"));
+        model.addAttribute("categories",categoryService.findByStatus("0"));
+        model.addAttribute("suppliers",supplierService.findByStatus("0"));
         model.addAttribute("productDto",productDto);
         return "product/add";
     }
@@ -68,20 +72,24 @@ public class ProductController {
     }
     @RequestMapping(value = "/product/edit/{id}")
     public String edit(Model model,@PathVariable("id") Integer id){
-        model.addAttribute("categories",categoryService.findByStatus("1"));
-        model.addAttribute("suppliers",supplierService.findByStatus("1"));
+        model.addAttribute("categories",categoryService.findByStatus("0"));
+        model.addAttribute("suppliers",supplierService.findByStatus("0"));
         model.addAttribute("productDto",productService.findById(id));
         return "product/edit";
     }
 
     private static String upload( MultipartFile part,HttpServletRequest request,String path) throws IOException {
         System.out.println("uploadRootPath=" + path);
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
+        String strDate = dateFormat.format(date);
+
 
         File uploadRootDir = new File(path);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
-        String fileName = part.getOriginalFilename().replaceAll("\\s", "_");
+        String fileName = strDate+part.getOriginalFilename().replaceAll("\\s", "_");
         File file= new File(path +"/"+ fileName);
         try(InputStream is = part.getInputStream()){
             try(OutputStream os = new FileOutputStream(file)){

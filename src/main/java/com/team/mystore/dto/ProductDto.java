@@ -4,20 +4,18 @@ import com.team.mystore.entity.Category;
 import com.team.mystore.entity.Supplier;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class ProductDto {
     private Integer productId;
     @NotEmpty(message = "Name is required")
     @Size(min = 3,max = 100)
     private String name;
-    @NotEmpty(message = "Amount total number is required")
-    @Pattern(regexp = "-?[1-9]\\d*|0",message = "Amount total number is invalid")
+    @NotNull(message = "Amount total number is required")
+    @Min(1)
     private Integer amountTotal;
-    @NotEmpty(message = "Price number is required")
-    @Pattern(regexp = "-?[1-9]\\d*|0",message = "Price number is invalid")
+    @NotNull(message = "Price number is required")
+    @Min(1)
     private Integer price;
     @NotEmpty(message = "detail is required")
     @Size(min = 10,max = 200)
@@ -25,9 +23,7 @@ public class ProductDto {
     @NotEmpty(message = "Status is required")
     @Size(min = 1,max = 1)
     private String status;
-    @NotEmpty(message = "Supplier is required")
     private Supplier supplier;
-    @NotEmpty(message = "Category is required")
     private Category category;
     private String image;
     private MultipartFile part;
