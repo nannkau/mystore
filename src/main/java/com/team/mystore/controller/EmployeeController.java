@@ -1,5 +1,6 @@
 package com.team.mystore.controller;
 
+import com.team.mystore.dto.EmployeeDto;
 import com.team.mystore.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,5 +16,12 @@ public class EmployeeController {
     public String employee(Model model){
         model.addAttribute("employees",employeeService.findEmployeeActive());
         return "employee/employee";
+    }
+
+    @RequestMapping(value = "/admin/employee/add.html")
+    public String add(Model model){
+        EmployeeDto em =new EmployeeDto();
+        model.addAttribute("em",em);
+        return "employee/Add";
     }
 }
