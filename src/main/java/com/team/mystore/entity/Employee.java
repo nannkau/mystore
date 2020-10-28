@@ -3,6 +3,7 @@ package com.team.mystore.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

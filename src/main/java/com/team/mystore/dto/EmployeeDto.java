@@ -4,12 +4,18 @@ import com.team.mystore.entity.Invoice;
 import com.team.mystore.entity.Recevie;
 import com.team.mystore.entity.User;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDto {
     private Integer employeeId;
+    @NotEmpty(message = "name is not empty")
     private String name;
+    //@Pattern(regexp = "(03|07|08|09|01[2|6|8|9])+([0-9]{8})\\b")
     private String phoneNumber;
     private String idNo;
     private String address;
