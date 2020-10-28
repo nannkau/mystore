@@ -1,39 +1,29 @@
-package com.team.mystore.entity;
+package com.team.mystore.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.team.mystore.entity.Invoice;
+import com.team.mystore.entity.Recevie;
+import com.team.mystore.entity.User;
 
-import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
-import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "employee")
-public class Employee implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
+public class EmployeeDto {
     private Integer employeeId;
-    @Column(name = "name",length = 100)
+    @NotEmpty(message = "name is not empty")
     private String name;
-    @Column(name = "phone_number",length = 12)
+    //@Pattern(regexp = "(03|07|08|09|01[2|6|8|9])+([0-9]{8})\\b")
     private String phoneNumber;
-    @Column(name = "id_no",length = 20)
     private String idNo;
-    @Column(name = "address")
     private String address;
-    @DateTimeFormat(pattern ="dd/MM/yyyy")
-    @Column(name = "birth_date")
     private String birthDate;
-    @Column(name = "status", nullable = false,length = 1)
     private String status;
-    @OneToOne(mappedBy = "employee")
     private User user;
-    @OneToMany(mappedBy = "employee")
-    private List<Invoice> invoices= new ArrayList<>();
-    @OneToMany(mappedBy = "employee")
-    private List<Recevie> recevies = new ArrayList<>();
+    private List<Invoice> invoices;
+    private List<Recevie> recevies;
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -83,6 +73,14 @@ public class Employee implements Serializable {
         this.birthDate = birthDate;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public User getUser() {
         return user;
     }
@@ -105,13 +103,5 @@ public class Employee implements Serializable {
 
     public void setRecevies(List<Recevie> recevies) {
         this.recevies = recevies;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

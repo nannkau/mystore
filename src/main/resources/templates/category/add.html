@@ -29,15 +29,18 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="all-form-element-inner">
-                                        <form action="#" th:action="@{/category/add.html}" th:object="${category}" method="post">
+                                        <form action="#" th:action="@{/category/add.html}" th:object="${category}"
+                                              method="post">
                                             <div class="form-group-inner">
                                                 <div class="row">
                                                     <div class="col-lg-3">
                                                         <label class="login2 pull-right pull-right-pro">Name</label>
                                                     </div>
                                                     <div class="col-lg-5">
-                                                        <input type="text" id="name" th:field="*{name}" class="form-control" name="name" />
-                                                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="badge badge-danger left"></span>
+                                                        <input type="text" id="name" th:field="*{name}"
+                                                               class="form-control" name="name"/>
+                                                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                                              class="badge badge-danger left"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -48,11 +51,14 @@
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-select-list">
-                                                            <select class="form-control custom-select-value" name="account" th:field="*{status}">
+                                                            <select class="form-control custom-select-value"
+                                                                    name="account" th:field="*{status}">
                                                                 <option value="0">Active</option>
                                                                 <option value="1">Not Active</option>
                                                             </select>
-                                                            <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="badge badge-danger left"></span>
+                                                            <span th:if="${#fields.hasErrors('status')}"
+                                                                  th:errors="*{status}"
+                                                                  class="badge badge-danger left"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -63,7 +69,9 @@
                                                         <div class="col-lg-3"></div>
                                                         <div class="col-lg-9">
                                                             <div class="login-horizental cancel-wp pull-left">
-                                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                                <button class="btn btn-sm btn-primary login-submit-cs"
+                                                                        type="submit">Save Change
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -75,9 +83,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
