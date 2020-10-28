@@ -22,18 +22,23 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role save(Role role) {
-        return null;
+        return roleRepository.save(role);
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        Optional<Role> optionalRole = findById(id);
+        Role role= new Role();
+        role=optionalRole.get();
+        role.setFlagDelete("1");
+        roleRepository.save(role);
     }
 
     @Override
     public Optional<Role> findById(Integer id) {
-        return Optional.empty();
+        return roleRepository.findById(id);
     }
+
 
     @Override
     public List<Role> findByFlagDelete(String flag) {

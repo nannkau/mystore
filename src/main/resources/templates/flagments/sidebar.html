@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,6 +21,8 @@
                                         </li>
                                         <li class="nav-item"><a th:href="@{/product/index.html}" class="nav-link">Product</a>
                                         </li>
+                                        <li class="nav-item" ><a th:href="@{/role/index.html}" class="nav-link">Role</a>
+                                        </li>
                                         <li class="nav-item"><a th:href="@{/supplier/index.html}" class="nav-link">Supplier</a>
                                         </li>
                                         <li class="nav-item"><a href="#" class="nav-link">Services</a>
@@ -36,6 +38,25 @@
                                             </div>
                                         </li>
                                         <li class="nav-item"><a href="#" class="nav-link">Support</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" sec:authorize="isAuthenticated()">
+                                <div class="header-right-info">
+                                    <ul class="nav navbar-nav mai-top-nav header-right-menu">
+
+                                        <li class="nav-item">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                <span class="glyphicon">&#xe008;</span>
+                                                <span class="admin-name"><span sec:authentication="name"></span></span>
+                                                <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                            </a>
+                                            <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+                                                <li><a href="#"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
+                                                <li><a th:href="@{/logout}" class="nav-link"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </div>
