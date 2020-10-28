@@ -20,19 +20,19 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @RequestMapping(value = "/role/index.html")
+    @RequestMapping(value = "/admin/role/index.html")
     public String index(Model model){
         model.addAttribute("roles",roleService.findAll());
         return "role/index";
     }
 
-    @RequestMapping(value = "/role/add.html")
+    @RequestMapping(value = "/admin/role/add.html")
     public String add(Model model){
         Role role= new Role();
         model.addAttribute("role",role);
         return "role/add";
     }
-    @RequestMapping(value = "/role/add.html",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/role/add.html",method = RequestMethod.POST)
     public String add(@Valid Role role, BindingResult result){
         if (result.hasErrors()) {
             return "role/add";
@@ -40,18 +40,18 @@ public class RoleController {
         else {
             roleService.save(role);
         }
-        return "redirect:/role/index.html";
+        return "redirect:/admin/role/index.html";
     }
-    @RequestMapping(value = "/role/edit/{id}")
+    @RequestMapping(value = "/admin/role/edit/{id}")
     public String edit(Model model, @PathVariable("id") Integer id){
         Role role=roleService.findById(id).get();
         model.addAttribute("role",role);
         return "role/edit";
     }
-    @RequestMapping(value = "/role/delete/{id}")
+    @RequestMapping(value = "/admin/role/delete/{id}")
     public String delete(Model model,@PathVariable("id") Integer id){
 
         roleService.deleteById(id);
-        return "redirect:/role/index.html";
+        return "redirect:/admin/role/index.html";
     }
 }
