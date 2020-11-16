@@ -19,7 +19,10 @@ public class Product implements Serializable {
     private Integer amountTotal;
     @Column(name = "price")
     private Integer price;
+    @Column(name = "sale_price")
+    private Integer salePrice;
     @Column(name = "image",length = 100)
+
     private String image;
     @Column(name = "detail",length = 100)
     private String detail;
@@ -122,5 +125,13 @@ public class Product implements Serializable {
 
     public void setRecevieDetails(List<RecevieDetail> recevieDetails) {
         this.recevieDetails = recevieDetails;
+    }
+
+    public Integer getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Integer salePrice) {
+        this.salePrice = salePrice;
     }
 }

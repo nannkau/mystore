@@ -1,5 +1,6 @@
 package com.team.mystore.service.impl;
 
+import com.team.mystore.entity.Employee;
 import com.team.mystore.entity.User;
 import com.team.mystore.repository.UserRepository;
 import com.team.mystore.service.UserService;
@@ -42,4 +43,5 @@ public class UserServiceImpl implements UserService {
     public User findById(int id) {
         return userRepository.findById(id);
     }
+
 }

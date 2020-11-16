@@ -12,8 +12,6 @@ public class InvoiceDetail implements Serializable {
     private Integer InvoiceDetailId;
     @Column(name = "amount")
     private Integer amount;
-    @Column(name = "price")
-    private Integer price;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -35,14 +33,6 @@ public class InvoiceDetail implements Serializable {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 
     public Product getProduct() {
