@@ -1,5 +1,7 @@
 package com.team.mystore.entity;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,14 +21,15 @@ public class Invoice implements Serializable {
     private Integer priceTotal;
     @Column(name = "status", nullable = false,length = 1)
     private String status;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.PERSIST)
     @JoinColumn(name = "consumer_id")
     private Consumer consumer;
-    @OneToMany(mappedBy = "invoice")
-    private List<InvoiceDetail> invoiceDetails= new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "invoice_id")
+    private List<InvoiceDetail> invoiceDetails;
 
     public Integer getInvoiceId() {
         return invoiceId;

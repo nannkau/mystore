@@ -43,10 +43,13 @@ public class ProductServiceImpl implements ProductService {
     public Product save(ProductDto productDto) {
         ModelMapper modelMapper= new ModelMapper();
         Product product=modelMapper.map(productDto,Product.class);
-        Product temp=productRepository.findById(productDto.getProductId()).get();
-        if(temp.getImage()!=null){
-            product.setImage(temp.getImage());
-        }
+       if(product.getProductId()!=null){
+           Product temp=productRepository.findById(productDto.getProductId()).get();
+           if(temp.getImage()!=null){
+               product.setImage(temp.getImage());
+           }
+       }
+
         if (productDto.getPart().getSize()>0){
             try {
                 product.setImage(UploadUtils.upload(productDto.getPart(),outdir));

@@ -2,10 +2,7 @@ package com.team.mystore.service.impl;
 
 import com.team.mystore.dto.Item;
 import com.team.mystore.dto.ItemDto;
-import com.team.mystore.entity.Employee;
-import com.team.mystore.entity.Invoice;
-import com.team.mystore.entity.InvoiceDetail;
-import com.team.mystore.entity.Product;
+import com.team.mystore.entity.*;
 import com.team.mystore.repository.EmployeeRepository;
 import com.team.mystore.repository.InvoiceRepository;
 import com.team.mystore.repository.ProductRepository;
@@ -14,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -38,18 +36,26 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice save( ItemDto itemDto, Authentication authentication) {
         Employee employee= employeeRepository.findEmployeeByUserName(authentication.getName()).get(0);
         Invoice invoice = new Invoice();
+        invoice.setStatus("0");
+        invoice.setCreateDate(new Date());
         invoice.setEmployee(employee);
-        invoice.setConsumer(itemDto.getConsumer());
+        Consumer consumer= new Consumer();
+        consumer=itemDto.getConsumer();
+        consumer.setStatus("0");
+        invoice.setConsumer(consumer);
         List<InvoiceDetail> invoiceDetails= new ArrayList<>();
+        Integer price=0;
        for (Item item: itemDto.getItemList()){
            if(item.getSelected()==true){
                InvoiceDetail invoiceDetail= new InvoiceDetail();
                Product product= productRepository.findById(item.getProductId()).get();
+               price=price+(product.getPrice()*item.getAmount());
                invoiceDetail.setProduct(product);
                invoiceDetail.setAmount(item.getAmount());
                invoiceDetails.add(invoiceDetail);
            }
        }
+       invoice.setPriceTotal(price);
        invoice.setInvoiceDetails(invoiceDetails);
         return invoiceRepository.save(invoice);
     }

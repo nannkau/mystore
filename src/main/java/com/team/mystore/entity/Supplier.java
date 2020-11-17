@@ -21,7 +21,7 @@ public class Supplier implements Serializable {
     @Column(name = "status", nullable = false,length = 1)
     private String status;
     @OneToMany(mappedBy = "supplier")
-    private List<Product> products= new ArrayList<>();
+    private List<Product> products;
 
     public Integer getSupplierId() {
         return supplierId;

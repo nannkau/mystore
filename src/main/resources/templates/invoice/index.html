@@ -90,7 +90,7 @@
                                                 <th data-field="price">Price</th>
                                                 <th data-field="amountTotal" >Amount Total</th>
                                                 <th data-field="status" >Status</th>
-                                                <th >Action</th>
+                                                <th >Amount in store</th>
                                             </tr>
                                             </thead>
                                             <tbody >
@@ -107,11 +107,8 @@
                                                 <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">price</td>
                                                 <td> <input type="text" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
                                                 <td th:text="${product.status=='1'? 'active':'not active'}">status</td>
-                                                <td>
-                                                    <div class="btn-group project-list-action">
-                                                        <a th:href="@{'/product/edit/' + ${product.productId}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
-                                                        <a th:href="@{'/product/delete/' + ${product.productId}}"><button class="btn btn-white btn-action btn-xs"><i class="fa fa-trash-o" aria-hidden="true"> </i>Delete</button></a>
-                                                    </div>
+                                                <td th:text="${product.amountTotal}">
+
                                                 </td>
 
                                             </tr>
@@ -131,7 +128,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
                         </form>
 
                     </div>
@@ -140,6 +137,9 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
 <th:block th:replace="/flagments/footer::footer"></th:block>
 </body>
 </html>

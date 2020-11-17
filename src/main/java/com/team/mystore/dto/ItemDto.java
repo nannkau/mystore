@@ -1,7 +1,6 @@
 package com.team.mystore.dto;
 
 import com.team.mystore.entity.Consumer;
-import com.team.mystore.entity.InvoiceDetail;
 
 import java.util.List;
 
