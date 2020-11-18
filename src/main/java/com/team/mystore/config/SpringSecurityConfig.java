@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -30,7 +29,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/seller/**").hasAnyAuthority("admin","seller")
                 .antMatchers("/staff/**").hasAnyAuthority("staff","admin")
                 .antMatchers("/admin/**").hasAnyAuthority("admin")
-                .antMatchers("/**","/register").permitAll()
+                .antMatchers("/**").hasAnyAuthority("admin","seller","staff")
+                .antMatchers("/register").permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessdenied")

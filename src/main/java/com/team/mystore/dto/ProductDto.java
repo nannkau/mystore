@@ -12,10 +12,10 @@ public class ProductDto {
     @Size(min = 3,max = 100)
     private String name;
     @NotNull(message = "Amount total number is required")
-    @Min(1)
+    @Min(value = 1, message = "The value must be positive")
     private Integer amountTotal;
     @NotNull(message = "Price number is required")
-    @Min(1)
+    @Min(value = 1, message = "The value must be positive")
     private Integer price;
     @NotEmpty(message = "detail is required")
     @Size(min = 10,max = 200)

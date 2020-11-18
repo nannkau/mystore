@@ -22,8 +22,9 @@ public class Recevie {
     @ManyToOne()
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @OneToMany(mappedBy = "recevie",fetch = FetchType.LAZY)
-    private List<RecevieDetail> recevieDetails= new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "recevie_id")
+    private List<RecevieDetail> recevieDetails;
 
     public Integer getReceiveId() {
         return receiveId;

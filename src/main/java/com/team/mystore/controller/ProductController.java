@@ -27,8 +27,6 @@ import java.util.Date;
 @Controller
 public class ProductController {
 
-    @Value("${upload.path}")
-    private String outdir;
 
     private final ProductService productService;
     private final CategoryService categoryService;
@@ -56,8 +54,7 @@ public class ProductController {
         return "product/add";
     }
     @RequestMapping(value = "product/add.html",method = RequestMethod.POST)
-    public String add(@Valid ProductDto productDto, BindingResult result, HttpServletRequest request) throws IOException {
-        productDto.setImage(upload(productDto.getPart(),request,outdir));
+    public String add(@Valid ProductDto productDto, BindingResult result) throws IOException {
         if (result.hasErrors()) {
             return "product/add";
         }
@@ -78,29 +75,6 @@ public class ProductController {
         return "product/edit";
     }
 
-    private static String upload( MultipartFile part,HttpServletRequest request,String path) throws IOException {
-        System.out.println("uploadRootPath=" + path);
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
-        String strDate = dateFormat.format(date);
 
-
-        File uploadRootDir = new File(path);
-        if (!uploadRootDir.exists()) {
-            uploadRootDir.mkdirs();
-        }
-        String fileName = strDate+part.getOriginalFilename().replaceAll("\\s", "_");
-        File file= new File(path +"/"+ fileName);
-        try(InputStream is = part.getInputStream()){
-            try(OutputStream os = new FileOutputStream(file)){
-                int len = 0;
-                byte[] bytes = new byte[1024];
-                while ( ( len = is.read(bytes, 0, 1024)) > 0) {
-                    os.write(bytes, 0, len);
-                }
-            }
-        }
-        return fileName;
-    }
 
 }

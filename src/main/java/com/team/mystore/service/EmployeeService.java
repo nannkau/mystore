@@ -13,4 +13,5 @@ public interface EmployeeService {
     public List<Employee> findEmployeeNotExistAccount();
     public Employee finEmployeeById(int id);
     public List<Employee> findEmployeeActive();
+    public Employee findByUserName(String userName);
 }

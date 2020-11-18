@@ -21,8 +21,8 @@ public class Consumer {
     private String email;
     @Column(name = "status", nullable = false,length = 1)
     private String status;
-    @OneToMany(mappedBy = "consumer")
-    private List<Invoice> invoices= new ArrayList<>();
+    @OneToMany(mappedBy = "consumer",fetch = FetchType.LAZY)
+    private List<Invoice> invoices;
 
     public Integer getConsumerId() {
         return consumerId;

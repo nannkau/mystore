@@ -6,16 +6,20 @@ import com.team.mystore.entity.Product;
 import com.team.mystore.entity.Supplier;
 import com.team.mystore.repository.ProductRepository;
 import com.team.mystore.service.ProductService;
+import com.team.mystore.utils.UploadUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Value("${upload.path}")
+    private String outdir;
     private final ProductRepository productRepository;
 
     @Autowired
@@ -39,6 +43,20 @@ public class ProductServiceImpl implements ProductService {
     public Product save(ProductDto productDto) {
         ModelMapper modelMapper= new ModelMapper();
         Product product=modelMapper.map(productDto,Product.class);
+       if(product.getProductId()!=null){
+           Product temp=productRepository.findById(productDto.getProductId()).get();
+           if(temp.getImage()!=null){
+               product.setImage(temp.getImage());
+           }
+       }
+
+        if (productDto.getPart().getSize()>0){
+            try {
+                product.setImage(UploadUtils.upload(productDto.getPart(),outdir));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return productRepository.save(product);
     }
 
@@ -52,5 +70,15 @@ public class ProductServiceImpl implements ProductService {
         ModelMapper modelMapper= new ModelMapper();
         ProductDto productDto=modelMapper.map(productRepository.findById(id).get(),ProductDto.class);
         return productDto ;
+    }
+
+    @Override
+    public Product findProductById(Integer id) {
+        return productRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Product> getProductForInvoice(Integer number, String status) {
+        return productRepository.getProductByAmountTotalGreaterThanAndStatusEquals(number,status);
     }
 }
