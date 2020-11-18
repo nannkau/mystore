@@ -49,7 +49,7 @@ public class InvoiceServiceImpl implements InvoiceService {
            if(item.getSelected()==true){
                InvoiceDetail invoiceDetail= new InvoiceDetail();
                Product product= productRepository.findById(item.getProductId()).get();
-               price=price+(product.getPrice()*item.getAmount());
+               price=price+(product.getSalePrice()*item.getAmount());
                invoiceDetail.setProduct(product);
                invoiceDetail.setAmount(item.getAmount());
                invoiceDetails.add(invoiceDetail);

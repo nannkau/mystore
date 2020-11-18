@@ -46,6 +46,7 @@ public class InvoiceController {
             item.setProductId(product.getProductId());
             item.setSelected(false);
             items.add(item);
+
         }
         ItemDto itemDto= new ItemDto();
         itemDto.setItemList(items);
@@ -54,12 +55,15 @@ public class InvoiceController {
     }
     @RequestMapping(value = "/invoice/add.html",method = RequestMethod.POST)
     public String add(Model model, @Valid ItemDto itemDto, Authentication authentication, BindingResult result){
-        if (result.hasErrors()) {
+        if (result.hasErrors() || itemDto.getItemList().get(0).getSelected()==false) {
+            List<Product> products= productService.getProductForInvoice(0,"0");
+            model.addAttribute("products",products);
             return "invoice/index";
         }
         else {
            Invoice invoice= invoiceService.save(itemDto,authentication);
-            return "redirect:/invoice/successful.html/"+String.valueOf(invoice.getInvoiceId()) ;
+
+            return "redirect:/invoice/successful.html/"+(invoice.getInvoiceId()).toString() ;
         }
 
     }
