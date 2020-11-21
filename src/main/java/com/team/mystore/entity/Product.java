@@ -13,6 +13,8 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Integer productId;
+    @Column(name = "code")
+    private String code;
     @Column(name = "name",length = 100)
     private String name;
     @Column(name = "amount_total")
@@ -22,8 +24,11 @@ public class Product implements Serializable {
     @Column(name = "sale_price")
     private Integer salePrice;
     @Column(name = "image",length = 100)
-
     private String image;
+    @Column(name = "sex" ,length = 1)
+    private String sex;
+    @Column(name = "sizeProduct" ,length=2)
+    private String sizeProduct;
     @Column(name = "detail",length = 100)
     private String detail;
     @Column(name = "status", nullable = false,length = 1)
@@ -134,4 +139,29 @@ public class Product implements Serializable {
     public void setSalePrice(Integer salePrice) {
         this.salePrice = salePrice;
     }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSizeProduct() {
+        return sizeProduct;
+    }
+
+    public void setSizeProduct(String sizeProduct) {
+        this.sizeProduct = sizeProduct;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
+

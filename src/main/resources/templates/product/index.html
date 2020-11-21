@@ -35,10 +35,15 @@
                                     <thead>
                                     <tr>
                                         <th data-checkbox="true"></th>
-                                        <th data-field="id">ID</th>
                                         <th data-field="name" >Name</th>
+                                        <th data-field="code" >Code</th>
                                         <th data-field="price">Price</th>
+                                        <th data-field="salePrice">Sale Price</th>
+                                        <th data-field="size">Size</th>
+                                        <th data-field="supplier">Supplier</th>
+                                        <th data-field="category">Category</th>
                                         <th data-field="amountTotal" >Amount Total</th>
+                                        <th data-field="sex" >Sex</th>
                                         <th data-field="status" >Status</th>
                                         <th >Action</th>
                                     </tr>
@@ -46,11 +51,16 @@
                                     <tbody >
                                     <tr th:each=" product,cout :${products}">
                                         <td></td>
-                                        <td th:text="${product.productId}">id</td>
                                         <td th:text="${product.name}">name</td>
+                                        <td th:text="${product.code}">code</td>
                                         <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">price</td>
-                                        <td th:text="${product.amountTotal}">name</td>
-                                        <td th:text="${product.status=='1'? 'active':'not active'}">status</td>
+                                        <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 2, 'POINT')}">Sale Price</td>
+                                        <td th:text="${product.sizeProduct}">size</td>
+                                        <td th:text="${product.supplier.getName()}">Supplier</td>
+                                        <td th:text="${product.category.getName()}">Category</td>
+                                        <td th:text="${product.amountTotal}">amount</td>
+                                        <td th:text="${product.sex=='0'? 'female':'male'}">sex</td>
+                                        <td th:text="${product.status=='0'? 'active':'not active'}">status</td>
                                         <td>
                                             <div class="btn-group project-list-action">
                                                 <a th:href="@{'/product/edit/' + ${product.productId}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
