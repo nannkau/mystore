@@ -11,18 +11,30 @@ public class ProductDto {
     @NotEmpty(message = "Name is required")
     @Size(min = 3,max = 100)
     private String name;
+    @NotEmpty(message = "Name is required")
+    @Size(min = 3,max = 100)
+    private String code;
     @NotNull(message = "Amount total number is required")
     @Min(value = 1, message = "The value must be positive")
     private Integer amountTotal;
     @NotNull(message = "Price number is required")
     @Min(value = 1, message = "The value must be positive")
     private Integer price;
+    @NotNull(message = "Price number is required")
+    @Min(value = 1, message = "The value must be positive")
+    private Integer salePrice;
     @NotEmpty(message = "detail is required")
     @Size(min = 10,max = 200)
     private String detail;
     @NotEmpty(message = "Status is required")
     @Size(min = 1,max = 1)
     private String status;
+    @NotEmpty(message = "Status is required")
+    @Size(min = 1,max = 1)
+    private String sex;
+    @NotEmpty(message = "Status is required")
+    @Size(min = 2,max = 2 ,message = "size 2 char")
+    private String sizeProduct;
     private Supplier supplier;
     private Category category;
     private String image;
@@ -106,5 +118,37 @@ public class ProductDto {
 
     public void setPart(MultipartFile part) {
         this.part = part;
+    }
+
+    public Integer getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Integer salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSizeProduct() {
+        return sizeProduct;
+    }
+
+    public void setSizeProduct(String sizeProduct) {
+        this.sizeProduct = sizeProduct;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

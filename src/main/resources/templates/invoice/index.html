@@ -16,10 +16,7 @@
                     <div class="sparkline13-list shadow-reset">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h1>Category<span class="table-project-n"></span> Table</h1>
-                                <div class="sparkline13-outline-icon">
-                                    <a th:href="@{/product/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
-                                </div>
+                                <h1>Order<span class="table-project-n"></span> Table</h1>
                             </div>
                         </div>
                         <form action="#" th:action="@{/invoice/add.html}" th:object="${itemDto}" method="post">
@@ -85,11 +82,14 @@
                                             <thead>
                                             <tr>
                                                 <th data-field="checked">Click</th>
-                                                <th data-field="id">ID</th>
                                                 <th data-field="name" >Name</th>
+                                                <th data-field="code" >Code</th>
+                                                <th data-field="size" >Size</th>
+                                                <th data-field="supplier">Supplier</th>
+                                                <th data-field="category">Category</th>
+                                                <th data-field="sex" >Sex</th>
                                                 <th data-field="price">Price</th>
-                                                <th data-field="amountTotal" >Amount Total</th>
-                                                <th data-field="status" >Status</th>
+                                                <th data-field="amountTotal" >Amount</th>
                                                 <th >Amount in store</th>
                                             </tr>
                                             </thead>
@@ -102,15 +102,15 @@
                                                            th:field="*{itemList[__${count.index}__].productId}">
 
                                                 </td>
-                                                <td th:text="${product.productId}">id</td>
-                                                <td th:text="${product.name}">name</td>
-                                                <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">price</td>
+                                                <td th:text="${product.name}">Name</td>
+                                                <td th:text="${product.code}">Code</td>
+                                                <td th:text="${product.sizeProduct}">size</td>
+                                                <td th:text="${product.supplier.getName()}">Supplier</td>
+                                                <td th:text="${product.category.getName()}">Category</td>
+                                                <td th:text="${product.sex=='0'? 'female':'male'}">sex</td>
+                                                <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 2, 'POINT')}">price</td>
                                                 <td> <input type="text" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
-                                                <td th:text="${product.status=='1'? 'active':'not active'}">status</td>
-                                                <td th:text="${product.amountTotal}">
-
-                                                </td>
-
+                                                <td th:text="${product.amountTotal}"></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -120,7 +120,12 @@
                                                     <div class="col-lg-3"></div>
                                                     <div class="col-lg-9">
                                                         <div class="login-horizental cancel-wp pull-left">
-                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Buy</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="login-horizental cancel-wp pull-left">
+                                                            <a th:href="@{/invoice/add.html}"><button class="btn btn-sm btn-primary login-submit-cs" type="submit">Reset</button></a>
                                                         </div>
                                                     </div>
                                                 </div>

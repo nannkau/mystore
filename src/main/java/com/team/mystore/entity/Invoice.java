@@ -16,6 +16,7 @@ public class Invoice implements Serializable {
     @Column(name = "invoice_id")
     private Integer invoiceId;
     @Column(name = "create_date")
+    @Temporal(TemporalType.DATE)
     private Date createDate;
     @Column(name = "price_total")
     private Integer priceTotal;
