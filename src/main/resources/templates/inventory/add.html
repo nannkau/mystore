@@ -21,21 +21,40 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="#" th:action="@{inventory/add}" th:object="${itemDto}" method="post">
-
-
+                        <form  th:action="@{/inventory/add.html}" th:object="${inventoryDTOS}" method="post">
                             <div class="form-group-inner">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <label class="login2 pull-right pull-right-pro">Supplier</label>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-4">
                                         <div class="form-select-list">
-                                            <select class="form-control custom-select-value" id="s_supplier" name="category"  th:field="${suppliers}">
-                                                <option th:each="obj : ${suppliers}"
+                                            <select class="form-control custom-select-value" id="s_supplier"   th:field="${suppliers}">
+                                                <option  th:each="obj : ${suppliers}"
                                                         th:value="${obj.supplierId}"
-                                                        th:text="${obj.name}"></option>
+                                                        th:text="${obj.name}" th:selected="${supplier_id}"></option>
                                             </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                    <button class="btn btn-sm btn-primary login-submit-cs" id="c_supplier" type="button">Chọn </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">Finish Date</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <div class="form-group data-custon-pick" id="data_2">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="datePicker" th:field="*{recevie.creatDate}">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,34 +72,26 @@
                                         <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                             <thead>
                                             <tr>
-                                                <th data-field="checked">Click</th>
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name" >Name</th>
                                                 <th data-field="price">Price</th>
-                                                <th data-field="amountTotal" >Amount Total</th>
-                                                <th data-field="status" >Status</th>
+                                                <th data-field="amountTotal" >Amount </th>
                                                 <th >Amount in store</th>
                                             </tr>
+
                                             </thead>
+
                                             <tbody >
                                             <tr th:each=" product,count :${products}">
-
-                                                <td>  <input type="checkbox"
-                                                             th:field="*{itemList[__${count.index}__].selected}">
+                                                <td th:text="${product.getProductId()}">ID
                                                     <input type="hidden"
-                                                           th:field="*{itemList[__${count.index}__].productId}">
-
-                                                </td>
-                                                <td th:text="${product.productId}">id</td>
-                                                <td th:text="${product.name}">name</td>
-                                                <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">price</td>
-                                                <td> <input type="text" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
-                                                <td th:text="${product.status=='0'? 'active':'not active'}">status</td>
-                                                <td th:text="${product.amountTotal}">
-
-                                                </td>
-
+                                                           th:field="*{inventoryItems[__${count.index}__].product_id}" name ="product_id"></td>
+                                                <td th:text="${product.getName()}">Name</td>
+                                                <td th:text="${product.getPrice()}">Price</td>
+                                                <td ><input type="number" th:field="*{inventoryItems[__${count.index}__].soLuong}" name="soLuong" class="form-control"/></td>
                                             </tr>
+
+
                                             </tbody>
                                         </table>
                                         <div class="form-group-inner">
@@ -89,7 +100,7 @@
                                                     <div class="col-lg-3"></div>
                                                     <div class="col-lg-9">
                                                         <div class="login-horizental cancel-wp pull-left">
-                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,6 +109,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </form>
 
                     </div>
@@ -107,12 +119,27 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function () {
-        $('#s_supplier').on("change", function() {
-            console.log($('#s_supplier option:selected').val());
-            // your ajax call
 
-        });
+    $(document).ready(function () {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var c = url.searchParams.get("supplier_id");
+        $('#s_supplier').val(c).change();
+        var now = new Date();
+        now.setDate(now.getDate() + 1)
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth())).slice(-2);
+
+        var today = (day)+"/"+(month)+"/"+ now.getFullYear();
+
+        $('#datePicker').val(today);
+        //name="category" th:onchange="'window.location.href = \'?supplier_id=\' + this.value ' "
+    });
+
+    $("#c_supplier").click(function () {
+        var id= $('#s_supplier option:selected').val();
+        window.location.href = "http://localhost:8081/inventory/add.html?supplier_id="+id;
+
     });
 
 </script>
