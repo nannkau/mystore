@@ -2,18 +2,18 @@ package com.team.mystore.service.impl;
 
 import com.team.mystore.dto.Item;
 import com.team.mystore.dto.ItemDto;
+import com.team.mystore.dto.SearchInvoice;
 import com.team.mystore.entity.*;
 import com.team.mystore.repository.EmployeeRepository;
 import com.team.mystore.repository.InvoiceRepository;
 import com.team.mystore.repository.ProductRepository;
 import com.team.mystore.service.InvoiceService;
+import com.team.mystore.utils.DateUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
@@ -69,6 +69,21 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public Optional<Invoice> findById(Integer id) {
         return invoiceRepository.findById(id);
+    }
+
+    @Override
+    public List<Invoice> findByDate(SearchInvoice searchInvoice) {
+        if(searchInvoice.getFormDate()!=null && searchInvoice.getToDate()==null){
+            return invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"),new Date());
+        }
+        else {
+
+            if(searchInvoice.getFormDate()!=null && searchInvoice.getToDate()!=null){
+                List<Invoice> list=invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"mm-dd-yyyy"),DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"));
+                return invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"mm-dd-yyyy"),DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"));
+            }
+            return invoiceRepository.findAll();
+        }
     }
 
 

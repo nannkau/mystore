@@ -51,8 +51,8 @@
                                     <tbody >
                                     <tr th:each=" product,cout :${products}">
                                         <td></td>
-                                        <td th:text="${product.name}">name</td>
-                                        <td th:text="${product.code}">code</td>
+                                        <td th:text="${product.name}">Name</td>
+                                        <td th:text="${product.code}">Code</td>
                                         <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">price</td>
                                         <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 2, 'POINT')}">Sale Price</td>
                                         <td th:text="${product.sizeProduct}">size</td>
