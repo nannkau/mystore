@@ -16,4 +16,5 @@ public interface InvoiceService {
     public void deleteById(Integer id);
     public Optional<Invoice> findById(Integer id);
     public List<Invoice> findByDate(SearchInvoice searchInvoice);
+    public void setStatus(Integer id,String status);
 }

@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice,Integer > {
-    @Query("from Invoice i where i.createDate between :formDate and :toDate")
-    public List<Invoice> findByDate(@Param(value = "formDate")Date formDate,@Param("toDate") Date endDate);
+    @Query(value = "select * from invoice where create_date between STR_TO_DATE(:formDate,'%Y-%m-%d') and STR_TO_DATE(:toDate,'%Y-%m-%d')",nativeQuery = true)
+    public List<Invoice> findByDate(@Param(value = "formDate")String formDate,@Param("toDate") String endDate);
 }

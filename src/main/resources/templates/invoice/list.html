@@ -16,10 +16,7 @@
                     <div class="sparkline13-list shadow-reset">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h1>Role<span class="table-project-n"></span> Table</h1>
-                                <div class="sparkline13-outline-icon">
-                                    <a th:href="@{/admin/role/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
-                                </div>
+                                <h1>Order<span class="table-project-n"></span> Table</h1>
                             </div>
                         </div>
                         <form action="#" th:action="@{/admin/invoice/search.html}" th:object="${searchInvoice}" method="post" id="formData">
@@ -84,7 +81,7 @@
                                         <th data-field="address" >Address</th>
                                         <th data-field="phone" >Phone</th>
                                         <th data-field="email" >Email</th>
-                                        <th data-field="active" >Employee</th>
+                                        <th data-field="employee" >Employee</th>
                                         <th data-field="active" >Status</th>
                                         <th >Action</th>
                                     </tr>
@@ -97,14 +94,15 @@
                                         <td th:text="${invoice.getConsumer().getAddress()}">address</td>
                                         <td th:text="${invoice.getConsumer().getEmail()}">email</td>
                                         <td th:text="${invoice.getEmployee().getName()}">empl</td>
-                                        <td >
-                                            <p  th:style = "${invoice.getStatus()=='0'} ? 'color: blue' : 'color: red' " th:text="${invoice.getStatus()=='0'? 'shipping':'delivered'}">
-                                                    active
-                                            </p>
+                                        <td th:switch="${invoice.status}" >
+                                                <p th:case="'0'">Shipping</p>
+                                                <p th:case="'1'">delivered</p>
+                                                <p th:case="'2'">Cancel</p>
                                         </td>
                                         <td>
                                             <div class="btn-group project-list-action">
-                                                <a th:href="@{'/admin/invoice/edit/' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <a th:href="@{'/admin/invoice/edit.html?status=1&id=' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-check"></i> Delivered</button></a>
+                                                <a th:href="@{'/admin/invoice/edit.html?status=2&id=' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-ban"></i> Cancel</button></a>
                                             </div>
                                         </td>
 

@@ -74,16 +74,23 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> findByDate(SearchInvoice searchInvoice) {
         if(searchInvoice.getFormDate()!=null && searchInvoice.getToDate()==null){
-            return invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"),new Date());
+            return invoiceRepository.findByDate(searchInvoice.getFormDate(),DateUtils.date2String(new Date(),"yyyy-mm-dd"));
         }
         else {
 
             if(searchInvoice.getFormDate()!=null && searchInvoice.getToDate()!=null){
-                List<Invoice> list=invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"mm-dd-yyyy"),DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"));
-                return invoiceRepository.findByDate(DateUtils.string2Date(searchInvoice.getFormDate(),"mm-dd-yyyy"),DateUtils.string2Date(searchInvoice.getFormDate(),"yyyy-mm-dd"));
+                List<Invoice> list=invoiceRepository.findByDate(searchInvoice.getFormDate(),searchInvoice.getFormDate());
+                return invoiceRepository.findByDate(searchInvoice.getFormDate(),searchInvoice.getToDate());
             }
             return invoiceRepository.findAll();
         }
+    }
+
+    @Override
+    public void setStatus(Integer id, String status) {
+        Invoice invoice= invoiceRepository.findById(id).get();
+        invoice.setStatus(status);
+        invoiceRepository.save(invoice);
     }
 
 
