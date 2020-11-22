@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="#" th:action="@{inventory/add}" th:object="${itemDto}" method="post">
+                        <form action="#" th:action="@{inventory/detail/}" th:object="${itemDto}" method="post">
 
 
                             <div class="form-group-inner">
@@ -31,11 +31,7 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="form-select-list">
-                                            <select class="form-control custom-select-value" id="s_supplier" name="category"  th:field="${suppliers}">
-                                                <option th:each="obj : ${suppliers}"
-                                                        th:value="${obj.supplierId}"
-                                                        th:text="${obj.name}"></option>
-                                            </select>
+
                                         </div>
                                     </div>
                                 </div>

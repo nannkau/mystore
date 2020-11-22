@@ -5,6 +5,7 @@ import com.team.mystore.dto.*;
 import com.team.mystore.entity.Product;
 import com.team.mystore.entity.Recevie;
 import com.team.mystore.entity.Supplier;
+import com.team.mystore.service.InventoryService;
 import com.team.mystore.service.ProductService;
 import com.team.mystore.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,29 +27,18 @@ import java.util.List;
 public class InventoryController {
     private final ProductService productService;
     private final SupplierService supplierService;
+    private  final InventoryService inventoryService;
+    //private  final
     @Autowired
-    public InventoryController(ProductService productService,SupplierService supplierService){
+    public InventoryController(ProductService productService,SupplierService supplierService,InventoryService inventoryService){
         this.productService =productService;
         this.supplierService=supplierService;
+        this.inventoryService =inventoryService;
 
     }
     @RequestMapping(value = "/inventory/index.html")
     public String index(Model model) {
-        //InventoryDTO inventoryDTO = new InventoryDTO();
-        List<SupplierDto> suppliers= supplierService.findAll();
-        model.addAttribute("suppliers",suppliers);
-        List<Product> products = productService.getProductForInvoice(2,"0");
-        model.addAttribute("products",products);
-        List<Item> items= new ArrayList<>();
-        for (Product product: products){
-            Item item= new Item();
-            item.setProductId(product.getProductId());
-            item.setSelected(false);
-            items.add(item);
-        }
-        ItemDto itemDto= new ItemDto();
-        itemDto.setItemList(items);
-        model.addAttribute("itemDto",itemDto);
+       model.addAttribute("recivies",inventoryService.findAll());
         return "inventory/index";
     }
 

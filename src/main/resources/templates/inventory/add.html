@@ -124,6 +124,9 @@
         var url_string = window.location.href;
         var url = new URL(url_string);
         var c = url.searchParams.get("supplier_id");
+        if(c == null){
+            c=1;
+        }
         $('#s_supplier').val(c).change();
         var now = new Date();
         now.setDate(now.getDate() + 1)
