@@ -16,12 +16,12 @@
                     <div class="sparkline13-list shadow-reset">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h1>Inventory<span class="table-project-n"></span> </h1>
+                                <h1>Inventory<span class="table-project-n"></span></h1>
                                 <div class="sparkline13-outline-icon">
                                 </div>
                             </div>
                         </div>
-                        <form  th:action="@{/inventory/add.html}" th:object="${inventoryDTOS}" method="post">
+                        <form th:action="@{/inventory/add.html}" th:object="${inventoryDTOS}" method="post">
                             <div class="form-group-inner">
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -29,8 +29,9 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-select-list">
-                                            <select class="form-control custom-select-value" id="s_supplier"   th:field="${suppliers}">
-                                                <option  th:each="obj : ${suppliers}"
+                                            <select class="form-control custom-select-value" id="s_supplier"
+                                                    th:field="${suppliers}">
+                                                <option th:each="obj : ${suppliers}"
                                                         th:value="${obj.supplierId}"
                                                         th:text="${obj.name}" th:selected="${supplier_id}"></option>
                                             </select>
@@ -38,21 +39,25 @@
 
                                     </div>
                                     <div class="col-lg-4">
-                                    <button class="btn btn-sm btn-primary login-submit-cs" id="c_supplier" type="button">Chọn </button>
+                                        <button class="btn btn-sm btn-primary login-submit-cs" id="c_supplier"
+                                                type="button">Chọn
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group-inner">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <label class="login2 pull-right pull-right-pro">Finish Date</label>
+                                        <label class="login2 pull-right pull-right-pro">Create Date</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="input-mark-inner mg-b-22">
                                             <div class="form-group data-custon-pick" id="data_2">
                                                 <div class="input-group date">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <input type="text" class="form-control" id="datePicker" th:field="*{recevie.creatDate}">
+                                                    <span class="input-group-addon"><i
+                                                            class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="datePicker"
+                                                           th:field="*{recevie.creatDate}">
                                                 </div>
                                             </div>
                                         </div>
@@ -69,29 +74,48 @@
                                                 <option value="selected">Export Selected</option>
                                             </select>
                                         </div>
-                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                               data-show-columns="true" data-show-pagination-switch="true"
+                                               data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                               data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                                               data-show-export="true" data-click-to-select="true"
+                                               data-toolbar="#toolbar">
                                             <thead>
                                             <tr>
-                                                <th data-field="id">ID</th>
-                                                <th data-field="name" >Name</th>
+
+                                                <th data-field="name">Name</th>
+                                                <th data-field="code">Code</th>
+                                                <th data-field="size">Size</th>
+                                                <th data-field="supplier">Supplier</th>
+                                                <th data-field="category">Category</th>
+                                                <th data-field="sex">Sex</th>
                                                 <th data-field="price">Price</th>
-                                                <th data-field="amountTotal" >Amount </th>
-                                                <th >Amount in store</th>
+                                                <th data-field="amountTotal">Amount</th>
+                                                <th>Amount in store</th>
                                             </tr>
 
                                             </thead>
 
-                                            <tbody >
+                                            <tbody>
                                             <tr th:each=" product,count :${products}">
-                                                <td th:text="${product.getProductId()}">ID
-                                                    <input type="hidden"
-                                                           th:field="*{inventoryItems[__${count.index}__].product_id}" name ="product_id"></td>
-                                                <td th:text="${product.getName()}">Name</td>
-                                                <td th:text="${product.getPrice()}">Price</td>
-                                                <td ><input type="number" th:field="*{inventoryItems[__${count.index}__].soLuong}" name="soLuong" class="form-control"/></td>
+                                                <input type="hidden"
+                                                       th:field="*{inventoryItems[__${count.index}__].product_id}">
+                                                <td th:text="${product.name}">Name</td>
+                                                <td th:text="${product.code}">Code</td>
+                                                <td th:text="${product.sizeProduct}">size</td>
+                                                <td th:text="${product.supplier.getName()}">Supplier</td>
+                                                <td th:text="${product.category.getName()}">Category</td>
+                                                <td th:text="${product.sex=='0'? 'female':'male'}">sex</td>
+                                                <td >
+                                                    <input type="text" id="price" th:field="*{inventoryItems[__${count.index}__].price}"
+                                                           class="form-control"  name="email"/></td>
+                                                <td><input type="number" id="amountTotal" th:field="*{inventoryItems[__${count.index}__].soLuong}"
+                                                           class="form-control" min="0" name="email"/></td>
+                                                <td th:text="${product.amountTotal}"></td>
+                                                <td> <input type="hidden" id="tongtien"
+                                                           th:field="*{inventoryItems[__${count.index}__].tongtien}"
+                                                           class="form-control" name="email"/></td>
                                             </tr>
-
-
                                             </tbody>
                                         </table>
                                         <div class="form-group-inner">
@@ -100,7 +124,9 @@
                                                     <div class="col-lg-3"></div>
                                                     <div class="col-lg-9">
                                                         <div class="login-horizental cancel-wp pull-left">
-                                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save </button>
+                                                            <button class="btn btn-sm btn-primary login-submit-cs"
+                                                                    type="submit">Save
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,8 +150,8 @@
         var url_string = window.location.href;
         var url = new URL(url_string);
         var c = url.searchParams.get("supplier_id");
-        if(c == null){
-            c=1;
+        if (c == null) {
+            c = 1;
         }
         $('#s_supplier').val(c).change();
         var now = new Date();
@@ -133,15 +159,15 @@
         var day = ("0" + now.getDate()).slice(-2);
         var month = ("0" + (now.getMonth())).slice(-2);
 
-        var today = (day)+"/"+(month)+"/"+ now.getFullYear();
+        var today = (day) + "/" + (month) + "/" + now.getFullYear();
 
         $('#datePicker').val(today);
         //name="category" th:onchange="'window.location.href = \'?supplier_id=\' + this.value ' "
     });
 
     $("#c_supplier").click(function () {
-        var id= $('#s_supplier option:selected').val();
-        window.location.href = "http://localhost:8081/inventory/add.html?supplier_id="+id;
+        var id = $('#s_supplier option:selected').val();
+        window.location.href = "http://localhost:8081/inventory/add.html?supplier_id=" + id;
 
     });
 

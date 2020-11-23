@@ -4,11 +4,15 @@ public class inventoryItem {
     private Integer product_id;
     private Integer soLuong;
     private Integer tongtien;
+    private Integer price;
 
-    public inventoryItem(int product_id, int soLuong, int tongtien) {
-        this.product_id = product_id;
-        this.soLuong = soLuong;
-        this.tongtien = tongtien;
+    public Integer getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public int getProduct_id() {

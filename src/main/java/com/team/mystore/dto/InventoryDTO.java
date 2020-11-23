@@ -5,8 +5,8 @@ import com.team.mystore.entity.Recevie;
 import java.util.List;
 
 public class InventoryDTO {
-    private List<inventoryItem> inventoryItems;
-    private Recevie recevie;
+     List<inventoryItem> inventoryItems;
+     Recevie recevie;
 
     public List<inventoryItem> getInventoryItems() {
         return inventoryItems;

@@ -11,6 +11,8 @@ public class RecevieDetail {
     private Integer recevieDetailId;
     @Column(name = "amount_total")
     private Integer amountTotal;
+    @Column(name="price")
+    private Integer price;
     @ManyToOne()
     @JoinColumn(name = "product_id")
     private Product product;
@@ -48,6 +50,14 @@ public class RecevieDetail {
 
     public void setRecevie(Recevie recevie) {
         this.recevie = recevie;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }
 
