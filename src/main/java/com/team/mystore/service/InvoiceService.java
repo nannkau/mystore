@@ -8,6 +8,7 @@ import org.attoparser.dom.INode;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface InvoiceService {
@@ -17,4 +18,5 @@ public interface InvoiceService {
     public Optional<Invoice> findById(Integer id);
     public List<Invoice> findByDate(SearchInvoice searchInvoice);
     public void setStatus(Integer id,String status);
+    public Map<String,List<String>> countInvoice();
 }

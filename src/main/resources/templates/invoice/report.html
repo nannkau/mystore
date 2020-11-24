@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Role</title>
+    </th:block>
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="admin-dashone-data-table-area">
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                    <tr>
+                                        <th data-checkbox="true"></th>
+                                        <th data-field="name" >Month</th>
+                                        <th data-field="shipping" >Shipping</th>
+                                        <th data-field="delivered" >Delivered</th>
+                                        <th data-field="cancel" > cancel</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody >
+                                    <tr >
+                                        <td></td>
+                                        <td >1</td>
+                                        <td th:text="${shipping.get(0)}">shipping</td>
+                                        <td th:text="${delivered.get(0)}">delivered</td>
+                                        <td th:text="${cancel.get(0)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td>2</td>
+                                        <td th:text="${shipping.get(1)}">shipping</td>
+                                        <td th:text="${delivered.get(1)}">delivered</td>
+                                        <td th:text="${cancel.get(1)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >3</td>
+                                        <td th:text="${shipping.get(2)}">shipping</td>
+                                        <td th:text="${delivered.get(2)}">delivered</td>
+                                        <td th:text="${cancel.get(2)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >4</td>
+                                        <td th:text="${shipping.get(3)}">shipping</td>
+                                        <td th:text="${delivered.get(3)}">delivered</td>
+                                        <td th:text="${cancel.get(3)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >5</td>
+                                        <td th:text="${shipping.get(4)}">shipping</td>
+                                        <td th:text="${delivered.get(4)}">delivered</td>
+                                        <td th:text="${cancel.get(4)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >6</td>
+                                        <td th:text="${shipping.get(5)}">shipping</td>
+                                        <td th:text="${delivered.get(5)}">delivered</td>
+                                        <td th:text="${cancel.get(5)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >7</td>
+                                        <td th:text="${shipping.get(6)}">shipping</td>
+                                        <td th:text="${delivered.get(6)}">delivered</td>
+                                        <td th:text="${cancel.get(6)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >8</td>
+                                        <td th:text="${shipping.get(7)}">shipping</td>
+                                        <td th:text="${delivered.get(7)}">delivered</td>
+                                        <td th:text="${cancel.get(7)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >9</td>
+                                        <td th:text="${shipping.get(8)}">shipping</td>
+                                        <td th:text="${delivered.get(8)}">delivered</td>
+                                        <td th:text="${cancel.get(8)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >10</td>
+                                        <td th:text="${shipping.get(9)}">shipping</td>
+                                        <td th:text="${delivered.get(9)}">delivered</td>
+                                        <td th:text="${cancel.get(9)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >11</td>
+                                        <td th:text="${shipping.get(10)}">shipping</td>
+                                        <td th:text="${delivered.get(10)}">delivered</td>
+                                        <td th:text="${cancel.get(10)}">cancel</td>
+                                    </tr>
+                                    <tr >
+                                        <td></td>
+                                        <td >12</td>
+                                        <td th:text="${shipping.get(11)}">shipping</td>
+                                        <td th:text="${delivered.get(11)}">delivered</td>
+                                        <td th:text="${cancel.get(11)}">cancel</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
+</body>
+</html>

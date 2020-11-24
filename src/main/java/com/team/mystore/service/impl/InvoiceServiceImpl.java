@@ -93,5 +93,44 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoiceRepository.save(invoice);
     }
 
+    @Override
+    public Map<String, List<String>> countInvoice() {
+        List<String> invoiceList0= new ArrayList<>();
+        List<String> invoiceList1= new ArrayList<>();
+        List<String> invoiceList2= new ArrayList<>();
+        Map<String, List<String>> map= new HashMap<>();
+        List<Invoice> invoices= invoiceRepository.findAll();
+        for(int i=1;i<13;i++){
+            Integer shipping=0;
+            Integer delivered=0;
+            Integer cancel=0;
+            for(Invoice invoice: invoices){
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(invoice.getCreateDate());
+                int month = cal.get(Calendar.MONTH)+1;
+                if(month==i){
+                    if(invoice.getStatus().equals("0")){
+                        shipping++;
+                    }
+                    if(invoice.getStatus().equals("1")){
+                        delivered++;
+                    }
+                    if(invoice.getStatus().equals("2")){
+                        cancel++;
+                    }
+                }
+            }
+            invoiceList0.add(String.valueOf(shipping));
+            invoiceList1.add(String.valueOf(delivered));
+            invoiceList2.add(String.valueOf(cancel));
+
+
+        }
+        map.put("shipping",invoiceList0);
+        map.put("delivered",invoiceList1);
+        map.put("cancel",invoiceList2);
+        return map;
+    }
+
 
 }

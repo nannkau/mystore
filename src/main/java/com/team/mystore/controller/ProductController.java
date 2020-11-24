@@ -74,7 +74,12 @@ public class ProductController {
         model.addAttribute("productDto",productService.findById(id));
         return "product/edit";
     }
-
+    @RequestMapping(value = "/product/detail/{id}")
+    public String detail(Model model,@PathVariable("id") Integer id){
+        ProductDto productDto = productService.findById(id);
+        model.addAttribute("productDto",productDto);
+        return "product/detail";
+    }
 
 
 }

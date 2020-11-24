@@ -100,4 +100,15 @@ public class InvoiceController {
         invoiceService.setStatus(id,status);
         return "redirect:/admin/invoice/search.html";
     }
+    @RequestMapping("/admin/invoice/report.html")
+    public String report(Model model){
+
+        model.addAttribute("shipping",invoiceService.countInvoice().get("shipping"));
+        model.addAttribute("delivered",invoiceService.countInvoice().get("delivered"));
+        model.addAttribute("cancel",invoiceService.countInvoice().get("cancel"));
+
+
+        return "invoice/report";
+    }
+
 }

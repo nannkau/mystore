@@ -91,6 +91,7 @@
                                                 <th data-field="price">Price</th>
                                                 <th data-field="amountTotal" >Amount</th>
                                                 <th >Amount in store</th>
+                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody >
@@ -111,6 +112,12 @@
                                                 <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 2, 'POINT')}">price</td>
                                                 <td> <input type="text" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
                                                 <td th:text="${product.amountTotal}"></td>
+                                                <td>
+                                                    <div class="btn-group project-list-action">
+                                                        <a th:href="@{'/product/detail/' + ${product.getProductId()}}"> <i class="fa fa-apple"></i> Detail</a>
+                                                    </div>
+                                                </td>
+
                                             </tr>
                                             </tbody>
                                         </table>
