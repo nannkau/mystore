@@ -159,5 +159,6 @@ public class InventoryController {
 
         }
     }
+    //@RequestMapping(value = "/inventory/product")
 
 }

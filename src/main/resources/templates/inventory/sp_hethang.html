@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Role</title>
+    </th:block>
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="admin-dashone-data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline13-list shadow-reset">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1><span class="table-project-n"></span> Sản Phẩm sắp hết hàng</h1>
+                        </div>
+                    </div>
+
+                    <div class="sparkline13-graph">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <table class="table">
+
+
+                                    </table>
+                                </div>
+                                <div class="col-lg-2"></div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-10">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Product name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Sex</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col">Amount total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" recivieDetail :${recevie.getRecevieDetails()}">
+                                            <th scope="row" th:text="${recivieDetail.getRecevieDetailId()}"></th>
+                                            <td  th:text="${recivieDetail.getProduct().getName()}"></td>
+                                            <td th:text="${#numbers.formatDecimal(recivieDetail.getPrice(), 0, 'COMMA', 2, 'POINT')}"></td>
+                                            <td th:text="${recivieDetail.getProduct().getCategory().getName()}"></td>
+                                            <td th:text="${recivieDetail.getProduct().getCode()}"></td>
+                                            <td th:text="${recivieDetail.getProduct().getSex()=='0'? 'female':'male'}"></td>
+                                            <td th:text="${recivieDetail.getProduct().getSizeProduct()}"></td>
+                                            <td th:text="${recivieDetail.getAmountTotal()}"></td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
+</body>
+</html>
