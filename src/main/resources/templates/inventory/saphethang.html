@@ -52,15 +52,24 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each=" recivieDetail :${recevie.getRecevieDetails()}">
-                                            <th scope="row" th:text="${recivieDetail.getRecevieDetailId()}"></th>
-                                            <td  th:text="${recivieDetail.getProduct().getName()}"></td>
-                                            <td th:text="${#numbers.formatDecimal(recivieDetail.getPrice(), 0, 'COMMA', 2, 'POINT')}"></td>
-                                            <td th:text="${recivieDetail.getProduct().getCategory().getName()}"></td>
-                                            <td th:text="${recivieDetail.getProduct().getCode()}"></td>
-                                            <td th:text="${recivieDetail.getProduct().getSex()=='0'? 'female':'male'}"></td>
-                                            <td th:text="${recivieDetail.getProduct().getSizeProduct()}"></td>
-                                            <td th:text="${recivieDetail.getAmountTotal()}"></td>
+                                        <tr th:each=" s :${sp}">
+                                            <th scope="row" th:text="${s.getProductId()}"></th>
+                                            <td th:text="${s.getName()}"></td>
+                                            <td th:text="${#numbers.formatDecimal(s.getPrice(), 0, 'COMMA', 2, 'POINT')}"></td>
+                                            <td th:text="${s.getCategory().getName()}"></td>
+                                            <td th:text="${s.getCode()}"></td>
+                                            <td th:text="${s.getSex()=='0'? 'female':'male'}"></td>
+                                            <td th:text="${s.getSizeProduct()}"></td>
+                                            <td>
+                                                <div th:if="${s.amountTotal <5 && s.amountTotal>2}">
+                                                    <span style="background: #9B859D;color: white"
+                                                          th:text="${s.getAmountTotal()}"></span>
+                                                </div>
+                                                <div th:if="${s.amountTotal <=2 }" >
+                                                    <span style="background: #9e1a1a;color: white" th:text="${s.getAmountTotal()}"></span>
+                                                </div>
+
+                                            </td>
 
                                         </tr>
 

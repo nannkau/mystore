@@ -19,7 +19,8 @@
                                 <h1><span class="table-project-n"></span> Table</h1>
                             </div>
                         </div>
-                        <form action="#" th:action="@{/inventory/index.html}" th:object="${searchRecive}" method="post" id="formData">
+                        <form action="#" th:action="@{/inventory/index.html}" th:object="${searchRecive}" method="post"
+                              id="formData">
                             <div class="form-group-inner">
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -27,8 +28,8 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="input-mark-inner mg-b-22">
-                                            <div >
-                                                <input class="form-control" type="date"  th:field="*{formDate}">
+                                            <div>
+                                                <input class="form-control" type="date" th:field="*{formDate}">
                                             </div>
                                         </div>
                                     </div>
@@ -41,9 +42,9 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="input-mark-inner mg-b-22">
-                                                <div >
-                                                    <input class="form-control" type="date"  th:field="*{toDate}">
-                                                </div>
+                                            <div>
+                                                <input class="form-control" type="date" th:field="*{toDate}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,13 +56,29 @@
                                         <div class="col-lg-3"></div>
                                         <div class="col-lg-9">
                                             <div class="login-horizental cancel-wp pull-left">
-                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Search</button>
+                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">
+                                                    Search
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-10">
+
+                                </div>
+                                <div class="col-lg-2">
+                                    <a th:href="@{/inventory/product/saphethang}">
+                                        <button type="button" class="btn btn-primary">Sản phẩm sắp hết hàng</button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
                         <div class="sparkline13-graph">
                             <div class="datatable-dashv1-list custom-datatable-overright">
                                 <div id="toolbar">
@@ -71,31 +88,51 @@
                                         <option value="selected">Export Selected</option>
                                     </select>
                                 </div>
-                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true" data-show-pagination-switch="true"
+                                       data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                                       data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                     <thead>
                                     <tr>
                                         <th data-checkbox="true"></th>
-                                        <th data-field="name" >Id</th>
-                                        <th data-field="address" >Created Date</th>
-                                        <th data-field="phone" >Total Price</th>
-                                        <th data-field="email" >Employee</th>
-                                        <th data-field="employee" >Supplier</th>
-                                        <th >Action</th>
+                                        <th data-field="name">Id</th>
+                                        <th data-field="address">Created Date</th>
+                                        <th data-field="phone">Total Price</th>
+                                        <th data-field="email">Employee</th>
+                                        <th data-field="employee">Supplier</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody >
+                                    <tbody>
                                     <tr th:each=" recivie :${recivies}">
                                         <td></td>
                                         <td th:text="${recivie.getReceiveId()}">Id</td>
-                                        <td th:text="${#dates.format(recivie.creatDate, 'dd-MMM-yyyy')}">Created Date</td>
-                                        <td th:text="${#numbers.formatDecimal(recivie.getPriceTotal(), 0, 'COMMA', 2, 'POINT')}">Total Price</td>
+                                        <td th:text="${#dates.format(recivie.creatDate, 'dd-MMM-yyyy')}">Created Date
+                                        </td>
+                                        <td th:text="${#numbers.formatDecimal(recivie.getPriceTotal(), 0, 'COMMA', 2, 'POINT')}">
+                                            Total Price
+                                        </td>
                                         <td th:text="${recivie.getEmployee().getName()}">Employee</td>
-                                        <td th:text="${recivie.getRecevieDetails().get(0).getProduct().getSupplier().getName()}">Supplier</td>
+                                        <td th:text="${recivie.getRecevieDetails().get(0).getProduct().getSupplier().getName()}">
+                                            Supplier
+                                        </td>
                                         <td>
                                             <div class="btn-group project-list-action">
-                                                <a th:href="@{'/inventory/recevie/' + ${recivie.getReceiveId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-check"></i> Detail</button></a>
-                                                <a th:href="@{'/inventory/edit/' + ${recivie.getReceiveId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-ban"></i> Edit</button></a>
-                                                <a th:href="@{'/inventory/print/' + ${recivie.getReceiveId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-print"></i> print</button></a>
+                                                <a th:href="@{'/inventory/recevie/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-check"></i>
+                                                        Detail
+                                                    </button>
+                                                </a>
+                                                <a th:href="@{'/inventory/edit/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-ban"></i> Edit
+                                                    </button>
+                                                </a>
+                                                <a th:href="@{'/inventory/print/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-print"></i>
+                                                        print
+                                                    </button>
+                                                </a>
 
                                             </div>
                                         </td>

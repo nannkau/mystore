@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Chart</title>
+    </th:block>
+
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="basic-form-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline12-list shadow-reset mg-t-30">
+                    <div class="sparkline12-hd">
+                        <div class="main-sparkline12-hd">
+                            <h1>Chart</h1>
+                            <div class="sparkline12-outline-icon">
+                                <span class="sparkline12-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline12-collapse-close"><i class="fa fa-times"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <div class="col-lg-12">
+                            <form action="#" th:action="@{/statistical/employee}" th:object="${thongkenhanvien}" method="get"
+                                  id="formData">
+
+                                <div class="form-group-inner">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <label class="login2 pull-right pull-right-pro">Tháng</label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-select-list">
+                                                <select class="form-control custom-select-value" id=""
+                                                        th:field="*{month}">
+                                                    <option th:value="-1" th:selected="*{getMonth()}">All</option>
+                                                    <option th:each="obj : ${thangs}"
+                                                            th:value="${obj}"
+                                                            th:text="${obj}" th:selected="*{getMonth()}"></option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <button class="btn btn-sm btn-primary login-submit-cs" type="submit">
+                                                Show
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="sparkline12-graph">
+                        <b>BẢNG THỐNG KÊ DOANH THU BÁN HÀNG THEO NHÂN VIÊN</b>
+                        <br/>
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="name" >#</th>
+                                        <th data-field="code" >Nhân viên</th>
+                                        <th data-field="size" >Số đơn hàng</th>
+                                        <th data-field="supplier">Tổng doanh thu</th>
+                                        <th data-field="category">Thao tác</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody >
+                                    <tr th:each=" em,count :${thongkenhanvien.getEmployees()}">
+                                        <td th:text="${em.getEmployeeId()}"></td>
+                                        <td th:text="${em.getName()}"></td>
+                                        <td th:text="${em.getInvoices().size()}"></td>
+                                        <td th:text="${#numbers.formatDecimal(dt[__${count.index}__], 0, 'COMMA', 2, 'POINT')}"></td>
+                                        <td>
+                                            <a th:href="@{'/statistical/employee/detail?id=' + ${em.getEmployeeId()}+'&m='+${thongkenhanvien.getMonth()}}">
+                                                <button class="btn btn-white btn-xs"><i class="fa fa-check"></i>
+                                                    Detail
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    $.ajax({
+        type: "get",
+        url:"statistical/getdata",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        success: function( response ) {
+
+            var d = response.data;
+            var chart = Highcharts.chart('container', {
+
+                title: {
+                    text: 'Doanh thu '
+                },
+
+                subtitle: {
+                    text: ''
+                },
+
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Triệu VND'
+                    }
+                },
+
+                series: [{
+                    name:"Doanh Thu",
+                    type: 'column',
+                    colorByPoint: true,
+                    data: d,
+                    showInLegend: false
+                }]
+
+            });
+
+
+            $('#plain').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: false,
+                        polar: false
+                    },
+                    subtitle: {
+                        text: 'Plain'
+                    }
+                });
+            });
+
+            $('#inverted').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: true,
+                        polar: false
+                    },
+                    subtitle: {
+                        text: 'Inverted'
+                    }
+                });
+            });
+
+            $('#polar').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: false,
+                        polar: true
+                    },
+                    subtitle: {
+                        text: 'Polar'
+                    }
+                });
+            });
+        }
+
+    });
+
+
+
+
+
+</script>
+
+<th:block th:replace="/flagments/footer::footer"></th:block>
+</body>
+</html>

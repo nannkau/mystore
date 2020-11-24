@@ -1,10 +1,7 @@
 package com.team.mystore.controller;
 
 
-import com.team.mystore.dto.InventoryDTO;
-import com.team.mystore.dto.ListInventory;
-import com.team.mystore.dto.SupplierDto;
-import com.team.mystore.dto.inventoryItem;
+import com.team.mystore.dto.*;
 import com.team.mystore.entity.Product;
 import com.team.mystore.entity.Recevie;
 import com.team.mystore.entity.RecevieDetail;
@@ -159,6 +156,18 @@ public class InventoryController {
 
         }
     }
-    //@RequestMapping(value = "/inventory/product")
+    @RequestMapping(value = "/inventory/product/saphethang")
+    public String sphh(Model model){
+        List<ProductDto> products = productService.findAll();
+        List<ProductDto> productDtos = new ArrayList<>();
+        for(ProductDto productDto:products){
+            if(productDto.getAmountTotal()<5)
+            {
+                productDtos.add(productDto);
+            }
+        }
+        model.addAttribute("sp",productDtos);
+        return "inventory/saphethang";
+    }
 
 }
