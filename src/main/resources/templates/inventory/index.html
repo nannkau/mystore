@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/flagments/header::header">
-        <title>Role</title>
+        <title>Inventory</title>
     </th:block>
 </head>
 <body class="materialdesign">
@@ -67,22 +67,24 @@
                         </form>
                         <div class="row">
                             <div class="col-lg-12">
-                                <left>
-                                <a th:href="@{/inventory/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>CREATE NEW</button></a>
-                                </left>
+
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="col-lg-10">
+                                <div class="col-lg-8">
 
                                 </div>
                                 <div class="col-lg-2">
-                                    <a th:href="@{/inventory/product/saphethang}">
-                                        <button type="button" class="btn btn-primary">Sản phẩm sắp hết hàng</button>
-                                    </a>
 
+                                        <a th:href="@{/inventory/add.html}"><button type="button" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Nhập Hàng</button></a>
                                 </div>
+                                    <div class="col-lg-2">
+                                        <a th:href="@{/inventory/product/saphethang}">
+                                            <button type="button" class="btn btn-primary">Sản phẩm sắp hết hàng</button>
+                                        </a>
+                                    </div>
                             </div>
                         </div>
                         <br/>

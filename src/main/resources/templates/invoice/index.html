@@ -110,7 +110,7 @@
                                                 <td th:text="${product.category.getName()}">Category</td>
                                                 <td th:text="${product.sex=='0'? 'female':'male'}">sex</td>
                                                 <td th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 2, 'POINT')}">price</td>
-                                                <td> <input type="text" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
+                                                <td> <input type="number" min="1" th:max="${product.amountTotal}" id="amountTotal" th:field="*{itemList[__${count.index}__].amount}" class="form-control" name="email" /></td>
                                                 <td th:text="${product.amountTotal}"></td>
                                                 <td>
                                                     <div class="btn-group project-list-action">
@@ -128,11 +128,12 @@
                                                     <div class="col-lg-9">
                                                         <div class="login-horizental cancel-wp pull-left">
                                                             <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Buy</button>
+                                                            <a th:href="@{/temp}"><button  class="btn btn-sm btn-primary login-submit-cs" type="button">Reset</button></a>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-9">
                                                         <div class="login-horizental cancel-wp pull-left">
-                                                            <a th:href="@{/invoice/add.html}"><button class="btn btn-sm btn-primary login-submit-cs" type="submit">Reset</button></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,6 +151,7 @@
     </div>
 </div>
 <script>
+
 
 </script>
 <th:block th:replace="/flagments/footer::footer"></th:block>

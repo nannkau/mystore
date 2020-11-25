@@ -13,7 +13,7 @@ import java.util.List;
 public class RestController {
     @Autowired
      private InvoiceRepository invoiceRepository;
-    @RequestMapping(value = "/statistical/getdata")
+    @RequestMapping(value = "/admin/statistical/getdata")
     public HashMap<String, List<Integer>>getdata() {
         HashMap<String, List<Integer>> map = new HashMap<>();
        List<Invoice> invoices= invoiceRepository.findAll();

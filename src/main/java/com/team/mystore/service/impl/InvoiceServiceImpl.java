@@ -49,6 +49,8 @@ public class InvoiceServiceImpl implements InvoiceService {
            if(item.getSelected()==true){
                InvoiceDetail invoiceDetail= new InvoiceDetail();
                Product product= productRepository.findById(item.getProductId()).get();
+               product.setAmountTotal(product.getAmountTotal()-item.getAmount());
+               productRepository.save(product);
                price=price+(product.getSalePrice()*item.getAmount());
                invoiceDetail.setProduct(product);
                invoiceDetail.setAmount(item.getAmount());
@@ -88,9 +90,18 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public void setStatus(Integer id, String status) {
+
         Invoice invoice= invoiceRepository.findById(id).get();
         invoice.setStatus(status);
         invoiceRepository.save(invoice);
+        if(status.equals("2")){
+            for(InvoiceDetail invoiceDetail : invoice.getInvoiceDetails()){
+                Product product =  productRepository.getOne(invoiceDetail.getProduct().getProductId());
+                product.setAmountTotal(product.getAmountTotal() +invoiceDetail.getAmount());
+                productRepository.save(product);
+            }
+        }
+
     }
 
     @Override

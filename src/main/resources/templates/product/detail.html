@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/flagments/header::header">
-        <title>Category</title>
+        <title>Product</title>
     </th:block>
 </head>
 <body class="materialdesign">
@@ -19,7 +19,7 @@
                 <h2 th:text="${productDto.getName()}"></h2>
                 <p>Size:<span th:text="${productDto.getSizeProduct()}"></span>
                 </p>
-                <p>Price:<span th:text="${productDto.getPrice()}"></span>
+                <p>Price:<span th:text="${productDto.getSalePrice()}"></span>
                 </p>
                 <p>Category:<span th:text="${productDto.getCategory().getName()}"></span>
                 </p>

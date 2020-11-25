@@ -107,7 +107,7 @@
                                                 <td th:text="${product.category.getName()}">Category</td>
                                                 <td th:text="${product.sex=='0'? 'female':'male'}">sex</td>
                                                 <td >
-                                                    <input type="text" id="price" th:field="*{inventoryItems[__${count.index}__].price}"
+                                                    <input type="number" id="price" th:field="*{inventoryItems[__${count.index}__].price}"
                                                            class="form-control"  name="email"/></td>
                                                 <td><input type="number" id="amountTotal" th:field="*{inventoryItems[__${count.index}__].soLuong}"
                                                            class="form-control" min="0" name="email"/></td>

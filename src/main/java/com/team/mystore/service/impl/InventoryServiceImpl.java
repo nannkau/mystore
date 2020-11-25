@@ -69,6 +69,7 @@ public class InventoryServiceImpl implements InventoryService {
             if(inventoryItem.getSoLuong() >0) {
                 Product product= productRepository.findById(inventoryItem.getProduct_id()).get();
                 product.setAmountTotal(product.getAmountTotal()+inventoryItem.getSoLuong());
+                product.setPrice(inventoryItem.getPrice());
                 productRepository.save(product);
                 RecevieDetail recevieDetail = new RecevieDetail();
                 recevieDetail.setAmountTotal(inventoryItem.getSoLuong());

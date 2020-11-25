@@ -1,6 +1,8 @@
 package com.team.mystore.controller;
 
+import com.team.mystore.entity.User;
 import com.team.mystore.repository.UserRepository;
+import com.team.mystore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,17 +17,22 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = {"/","index.html"})
     public String index(){
         return "home";
     }
     @RequestMapping(value = {"/admin"})
-    public String admin(Model model){
-        UserDetails user =(UserDetails) (SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
-        user.getUsername();
-
-        return  "redirect:/index.html?q="+user.getUsername();
+    public String admin(Model model,Authentication authentication){
+        if(authentication.getAuthorities().contains("admin")){
+            return "redirect:/admin/statistical";
+        }else if(authentication.getAuthorities().contains("staff")){
+            return "redirect:/inventory/index.html";
+        }else{
+            return "redirect:/invoice/add.html";
+        }
     }
 
     @RequestMapping(value = {"/staff"})

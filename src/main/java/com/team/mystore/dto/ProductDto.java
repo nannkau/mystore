@@ -14,11 +14,11 @@ public class ProductDto {
     @NotEmpty(message = "Name is required")
     @Size(min = 3,max = 100)
     private String code;
-    @NotNull(message = "Amount total number is required")
-    @Min(value = 1, message = "The value must be positive")
+    //@NotNull(message = "Amount total number is required")
+    //@Min(value = 1, message = "The value must be positive")
     private Integer amountTotal;
-    @NotNull(message = "Price number is required")
-    @Min(value = 1, message = "The value must be positive")
+   // @NotNull(message = "Price number is required")
+    //@Min(value = 1, message = "The value must be positive")
     private Integer price;
     @NotNull(message = "Price number is required")
     @Min(value = 1, message = "The value must be positive")

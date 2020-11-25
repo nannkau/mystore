@@ -102,6 +102,8 @@
                                                 <a th:href="@{'/admin/invoice/edit.html?status=1&id=' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-check"></i> Delivered</button></a>
                                                 <a th:href="@{'/admin/invoice/edit.html?status=2&id=' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-ban"></i> Cancel</button></a>
                                                 <a th:href="@{'/admin/invoice/print.html/'+ ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-print"></i> Print</button></a>
+                                                <a th:href="@{'/admin/invoice/detail/' + ${invoice.getInvoiceId()}}"> <button class="btn btn-white btn-xs"><i class="fa fa-eye"></i> Detail</button></a>
+
 
                                             </div>
                                         </td>

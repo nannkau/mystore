@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/flagments/header::header">
-        <title>Inventory</title>
+        <title>Detail</title>
     </th:block>
 </head>
 <body class="materialdesign">
@@ -15,7 +15,7 @@
                 <div class="sparkline13-list shadow-reset">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1><span class="table-project-n"></span> Sản Phẩm sắp hết hàng</h1>
+                            <h1><span class="table-project-n"></span> Detail</h1>
                         </div>
                     </div>
 
@@ -26,7 +26,27 @@
                                 <div class="col-lg-8">
                                     <table class="table">
 
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Customer</th>
+                                            <td  th:text="${invoice.getConsumer().getName()}"></td>
+                                            <th scope="row">Phone</th>
+                                            <td  th:text="${invoice.getConsumer().getPhoneNumber()}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email: </th>
+                                            <td  th:text="${invoice.getConsumer().getEmail()}"></td>
+                                            <th scope="row">Address : </th>
+                                            <td  th:text="${invoice.getConsumer().getAddress()}"></td>
 
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Employee : </th>
+                                            <td  th:text="${invoice.getEmployee().getName()}"></td>
+                                            <th scope="row">Created Date :</th>
+                                            <td  th:text="${#dates.format(invoice.getCreateDate(), 'dd-MMM-yyyy')} "></td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div class="col-lg-2"></div>
@@ -41,7 +61,6 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Product name</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Category</th>
@@ -52,24 +71,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each=" s :${sp}">
-                                            <th scope="row" th:text="${s.getProductId()}"></th>
-                                            <td th:text="${s.getName()}"></td>
-                                            <td th:text="${#numbers.formatDecimal(s.getPrice(), 0, 'COMMA', 2, 'POINT')}"></td>
-                                            <td th:text="${s.getCategory().getName()}"></td>
-                                            <td th:text="${s.getCode()}"></td>
-                                            <td th:text="${s.getSex()=='0'? 'female':'male'}"></td>
-                                            <td th:text="${s.getSizeProduct()}"></td>
-                                            <td>
-                                                <div th:if="${s.amountTotal <5 && s.amountTotal>2}">
-                                                    <span style="background: #9B859D;color: white"
-                                                          th:text="${s.getAmountTotal()}"></span>
-                                                </div>
-                                                <div th:if="${s.amountTotal <=2 }" >
-                                                    <span style="background: #9e1a1a;color: white" th:text="${s.getAmountTotal()}"></span>
-                                                </div>
-
-                                            </td>
+                                        <tr th:each=" invoiceDetail :${invoice.invoiceDetails}">
+                                            <td  th:text="${invoiceDetail.getProduct().getName()}"></td>
+                                            <td th:text="${#numbers.formatDecimal(invoiceDetail.getProduct().getSalePrice(), 0, 'COMMA', 2, 'POINT')}"></td>
+                                            <td th:text="${invoiceDetail.getProduct().getCategory().getName()}"></td>
+                                            <td th:text="${invoiceDetail.getProduct().getCode()}"></td>
+                                            <td th:text="${invoiceDetail.getProduct().getSex()=='0'? 'female':'male'}"></td>
+                                            <td th:text="${invoiceDetail.getProduct().getSizeProduct()}"></td>
+                                            <td th:text="${invoiceDetail.getAmount()}"></td>
 
                                         </tr>
 

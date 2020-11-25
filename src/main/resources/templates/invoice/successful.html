@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:replace="/flagments/header::header">
+        <title>Category</title>
+    </th:block>
 </head>
-<body>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
 
+<div class="admin-dashone-data-table-area">
+     <h1> Order Successfully</h1>
+    <a th:href="@{/invoice/add.html}"><button  class="btn btn-sm btn-primary login-submit-cs" type="submit">Go to order page</button></a>
+
+</div>
+<script>
+
+
+</script>
+<th:block th:replace="/flagments/footer::footer"></th:block>
 </body>
 </html>

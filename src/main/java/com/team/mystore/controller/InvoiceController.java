@@ -58,7 +58,7 @@ public class InvoiceController {
         return "invoice/index";
     }
     @RequestMapping(value = "/invoice/add.html",method = RequestMethod.POST)
-    public String add(Model model, @Valid ItemDto itemDto, Authentication authentication, BindingResult result){
+    public String add(Model model, @Valid ItemDto itemDto, Authentication authentication,HttpServletResponse response, BindingResult result) throws IOException {
         Integer count=0;
         for(Item item: itemDto.getItemList()){
             if (item.getSelected()==true){
@@ -72,23 +72,34 @@ public class InvoiceController {
         }
         else {
            Invoice invoice= invoiceService.save(itemDto,authentication);
-
-            return "redirect:/invoice/successful.html/"+(invoice.getInvoiceId()).toString() ;
+            response.setContentType("application/pdf");
+            DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+            String currentDateTime = dateFormatter.format(new Date());
+            String headerKey = "Content-Disposition";
+            String headerValue = "attachment; filename=bill_" + currentDateTime + ".pdf";
+            response.setHeader(headerKey, headerValue);
+            ExportBill.export(response,invoice);
+            return null ;
         }
 
     }
-    @RequestMapping(value = "/invoice/successful.html/{id}")
-    public String  successful(Model model, @PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-        Invoice invoice= invoiceService.findById(id).get();
-        response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=bill_" + currentDateTime + ".pdf";
-        response.setHeader(headerKey, headerValue);
-        ExportBill.export(response,invoice);
-        return "redirect:/invoice/add.html";
+    @RequestMapping(value = "/temp")
+    public String temp(){
+           return "redirect:/invoice/add.html" ;
+
     }
+//    @RequestMapping(value = "/invoice/successful.html/{id}")
+//    public String  successful(Model model, @PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
+//        Invoice invoice= invoiceService.findById(id).get();
+//        response.setContentType("application/pdf");
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+//        String currentDateTime = dateFormatter.format(new Date());
+//        String headerKey = "Content-Disposition";
+//        String headerValue = "attachment; filename=bill_" + currentDateTime + ".pdf";
+//        response.setHeader(headerKey, headerValue);
+//        ExportBill.export(response,invoice);
+//        return "invoice/successful";
+//    }
     @RequestMapping(value = "/admin/invoice/print.html/{id}")
     public void  print(Model model, @PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
         Invoice invoice= invoiceService.findById(id).get();
@@ -121,5 +132,10 @@ public class InvoiceController {
 
         return "invoice/report";
     }
-
+    @RequestMapping("/admin/invoice/detail/{id}")
+    public String detail(Model model,@PathVariable("id") int id){
+        Invoice invoice = invoiceService.findById(id).get();
+        model.addAttribute("invoice",invoice);
+        return "invoice/detail";
+    }
 }
