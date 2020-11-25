@@ -21,7 +21,7 @@ public class StatisticalController  {
     private InvoiceService invoiceService;
     @Autowired
     private EmployeeService employeeService;
-    @RequestMapping(value = "/statistical")
+    @RequestMapping(value = "/admin/statistical")
     public String chart(Model model){
         List<Invoice> invoiceList =invoiceService.findAll();
         Map<Integer,List<Invoice>> listInvoiceByMonth = new HashMap<>();
@@ -45,7 +45,7 @@ public class StatisticalController  {
         model.addAttribute("listInvoiceByMonth",listInvoiceByMonth);
         return "Chart/doanhthu";
     }
-    @RequestMapping(value = "/statistical/detail/month/{month}")
+    @RequestMapping(value = "/admin/statistical/detail/month/{month}")
     public String detail(Model model, @PathVariable int month){
         List<Invoice> invoiceList =invoiceService.findAll();
         List<Invoice> result = new ArrayList<>();
@@ -62,7 +62,7 @@ public class StatisticalController  {
 
         return "Chart/detail";
     }
-    @RequestMapping(value = "/statistical/employee")
+    @RequestMapping(value = "/admin/statistical/employee")
     public String thongkenhanvien(Model model, HttpServletRequest request){
         String month = request.getParameter("month");
         Date date= new Date();
@@ -105,7 +105,7 @@ public class StatisticalController  {
         model.addAttribute("dt",doanhthu);
         return "Chart/doanhthutheonhanvien";
     }
-    @RequestMapping(value = "/statistical/employee/detail")
+    @RequestMapping(value = "/admin/statistical/employee/detail")
     public String  detailEmployee(Model model, HttpServletRequest request){
         String idEm= request.getParameter("id");
         String month= request.getParameter("m");

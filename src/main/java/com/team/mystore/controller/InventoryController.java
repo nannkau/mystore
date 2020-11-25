@@ -8,6 +8,7 @@ import com.team.mystore.entity.RecevieDetail;
 import com.team.mystore.service.InventoryService;
 import com.team.mystore.service.ProductService;
 import com.team.mystore.service.SupplierService;
+import com.team.mystore.utils.ExportBill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -149,7 +150,7 @@ public class InventoryController {
             String headerKey = "Content-Disposition";
             String headerValue = "attachment; filename=recevie_" + currentDateTime + ".pdf";
             response.setHeader(headerKey, headerValue);
-            //ExportBill.export(response,recevie);
+            ExportBill.exportRecevie(response,recevie);
             return "redirect:/inventory/index.html";
         }catch (Exception e){
             return "redirect:/inventory/index.html";

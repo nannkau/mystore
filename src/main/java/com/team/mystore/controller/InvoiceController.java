@@ -89,6 +89,17 @@ public class InvoiceController {
         ExportBill.export(response,invoice);
         return "redirect:/invoice/add.html";
     }
+    @RequestMapping(value = "/admin/invoice/print.html/{id}")
+    public void  print(Model model, @PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
+        Invoice invoice= invoiceService.findById(id).get();
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=bill_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        ExportBill.export(response,invoice);
+    }
     @RequestMapping("/admin/invoice/search.html")
     public String search(Model model, @Valid SearchInvoice searchInvoice,BindingResult bindingResult ){
         model.addAttribute("invoices",invoiceService.findByDate(searchInvoice));

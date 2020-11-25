@@ -15,7 +15,7 @@
                             <div class="col-lg-9 col-md-1 col-sm-1 col-xs-12">
                                 <div class="header-top-menu tabl-d-n">
                                     <ul class="nav navbar-nav mai-top-nav">
-                                        <li class="nav-item"><a href="#" class="nav-link">Home</a>
+                                        <li class="nav-item"><a th:href="@{/}" class="nav-link">Home</a>
                                         </li>
                                         <li sec:authorize="hasAuthority('admin')" class="nav-item"><a th:href="@{/admin/user.html}" class="nav-link">User</a>
                                         </li>
@@ -29,18 +29,17 @@
                                         </li>
                                         <li class="nav-item"><a th:href="@{/supplier/index.html}" class="nav-link">Supplier</a>
                                         </li>
-
-
-                                        <li class="nav-item"><a href="#" class="nav-link">Services</a>
+                                        <li sec:authorize="hasAuthority('seller')" class="nav-item"><a th:href="@{/invoice/add.html}" class="nav-link">Order</a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">Project <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span></a>
+
+                                        <li sec:authorize="hasAuthority('staff')" class="nav-item"><a th:href="@{/inventory/index.html}" class="nav-link">Recevie</a>
+                                        </li>
+                                        <li sec:authorize="hasAuthority('admin')" class="nav-item dropdown">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">Report <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span></a>
                                             <div role="menu" class="dropdown-menu animated flipInX">
-                                                <a href="#" class="dropdown-item">Company Info</a>
-                                                <a href="#" class="dropdown-item">Documentation</a>
-                                                <a href="#" class="dropdown-item">Expert Backend</a>
-                                                <a href="#" class="dropdown-item">Expert FrontEnd</a>
-                                                <a href="#" class="dropdown-item">Contact Support</a>
+                                                <a th:href="@{/category/index.html}" class="dropdown-item">revenue by month</a>
+                                                <a th:href="@{/category/index.html}" class="dropdown-item">revenue by employee</a>
+                                                <a th:href="@{/admin/invoice/report.html}" class="dropdown-item">invoice by month</a>
                                             </div>
                                         </li>
                                         <li class="nav-item"><a href="#" class="nav-link">Support</a>
