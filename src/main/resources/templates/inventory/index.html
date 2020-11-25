@@ -1,10 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Inventory</title>
+    <th:block th:replace="/flagments/header::header">
+        <title>Role</title>
+    </th:block>
 </head>
-<body>
-Inventory
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="admin-dashone-data-table-area">
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1><span class="table-project-n"></span> Table</h1>
+                            </div>
+                        </div>
+                        <form action="#" th:action="@{/inventory/index.html}" th:object="${searchRecive}" method="post"
+                              id="formData">
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">Form Date</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <div>
+                                                <input class="form-control" type="date" th:field="*{formDate}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">To Date</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <div>
+                                                <input class="form-control" type="date" th:field="*{toDate}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-inner">
+                                <div class="login-btn-inner">
+                                    <div class="row">
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-9">
+                                            <div class="login-horizental cancel-wp pull-left">
+                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-10">
+
+                                </div>
+                                <div class="col-lg-2">
+                                    <a th:href="@{/inventory/product/saphethang}">
+                                        <button type="button" class="btn btn-primary">Sản phẩm sắp hết hàng</button>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true" data-show-pagination-switch="true"
+                                       data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                                       data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                    <tr>
+                                        <th data-checkbox="true"></th>
+                                        <th data-field="name">Id</th>
+                                        <th data-field="address">Created Date</th>
+                                        <th data-field="phone">Total Price</th>
+                                        <th data-field="email">Employee</th>
+                                        <th data-field="employee">Supplier</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each=" recivie :${recivies}">
+                                        <td></td>
+                                        <td th:text="${recivie.getReceiveId()}">Id</td>
+                                        <td th:text="${#dates.format(recivie.creatDate, 'dd-MMM-yyyy')}">Created Date
+                                        </td>
+                                        <td th:text="${#numbers.formatDecimal(recivie.getPriceTotal(), 0, 'COMMA', 2, 'POINT')}">
+                                            Total Price
+                                        </td>
+                                        <td th:text="${recivie.getEmployee().getName()}">Employee</td>
+                                        <td th:text="${recivie.getRecevieDetails().get(0).getProduct().getSupplier().getName()}">
+                                            Supplier
+                                        </td>
+                                        <td>
+                                            <div class="btn-group project-list-action">
+                                                <a th:href="@{'/inventory/recevie/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-check"></i>
+                                                        Detail
+                                                    </button>
+                                                </a>
+                                                <a th:href="@{'/inventory/edit/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-ban"></i> Edit
+                                                    </button>
+                                                </a>
+                                                <a th:href="@{'/inventory/print/' + ${recivie.getReceiveId()}}">
+                                                    <button class="btn btn-white btn-xs"><i class="fa fa-print"></i>
+                                                        print
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
 </body>
 </html>

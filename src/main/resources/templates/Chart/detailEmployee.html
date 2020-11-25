@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Detail</title>
+    </th:block>
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="admin-dashone-data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline13-list shadow-reset">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1><span class="table-project-n"></span>Chi tiết doanh thu tháng <span th:text="${month}"></span></h1>
+                        </div>
+                    </div>
+
+                    <div class="sparkline13-graph">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                    <table class="table">
+
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Nhân viên:</th>
+                                            <td  th:text="${em.getName()}"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Tổng doanh thu tháng: </th>
+                                            <td  th:text="${tt}"></td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Số đơn hàng bán: </th>
+                                            <td  th:text="${em.getInvoices().size()}"></td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-4"></div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-10">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Created date</th>
+                                            <th scope="col">Price total</th>
+                                            <th scope="col">Employee</th>
+                                            <th scope="col">Customer</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" invoice :${em.getInvoices()}">
+                                            <th scope="row" th:text="${invoice.getInvoiceId()}"></th>
+                                            <td  th:text="${invoice.getCreateDate()}"></td>
+                                            <td th:text="${#numbers.formatDecimal(invoice.getPriceTotal(), 0, 'COMMA', 2, 'POINT')}"></td>
+                                            <td th:text="${invoice.getEmployee().getName()}"></td>
+                                            <td th:text="${invoice.getConsumer().getName()}"></td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
+</body>
+</html>

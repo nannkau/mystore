@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="/flagments/header::header">
+        <title>Edit</title>
+    </th:block>
+</head>
+<body class="materialdesign">
+<th:block th:replace="/flagments/sidebar::sidebar"></th:block>
+
+<div class="admin-dashone-data-table-area">
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>Order<span class="table-project-n"></span> </h1>
+                            </div>
+                        </div>
+                        <form action="#" th:action="@{/inventory/edit.html}" th:object="${recevie}" method="post" id="formData">
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">Supplier</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-select-list">
+                                            <input type="text"   th:field="*{recevieDetails[0].product.supplier.name}"  disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">Created Date</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-select-list">
+                                            <input type="text"   th:field="*{creatDate}"  disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-inner">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="login2 pull-right pull-right-pro">Employee</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-select-list">
+                                            <input type="text"   th:field="*{employee.name}"  disabled="disabled" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true" data-show-pagination-switch="true"
+                                       data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                                       data-show-export="true" data-click-to-select="true"
+                                       data-toolbar="#toolbar">
+                                    <thead>
+                                    <tr>
+
+                                        <th data-field="name">Name</th>
+                                        <th data-field="code">Code</th>
+                                        <th data-field="size">Size</th>
+                                        <th data-field="supplier">Supplier</th>
+                                        <th data-field="category">Category</th>
+                                        <th data-field="sex">Sex</th>
+                                        <th data-field="price">Price</th>
+                                        <th data-field="amountTotal">Amount</th>
+                                        <th>Amount in store</th>
+                                    </tr>
+
+                                    </thead>
+                                    <input type="hidden"
+                                           th:field="*{receiveId}">
+                                    <tbody>
+                                    <tr th:each=" item,count :${recevie.getRecevieDetails()}">
+                                        <td th:text="${item.product.name}">Name</td>
+                                        <td th:text="${item.product.code}">Code</td>
+                                        <td th:text="${item.product.sizeProduct}">size</td>
+                                        <td th:text="${item.product.supplier.getName()}">Supplier</td>
+                                        <td th:text="${item.product.category.getName()}">Category</td>
+                                        <td th:text="${item.product.sex=='0'? 'female':'male'}">sex</td>
+                                        <td >
+                                            <input type="number" id="price"
+                                                   th:field="*{recevieDetails[__${count.index}__].price}"
+                                                   class="form-control" min="0"  name="price"/>
+                                        </td>
+                                        <td><input type="number" id="amountTotal"
+                                                   th:field="*{recevieDetails[__${count.index}__].amountTotal}"
+                                                   class="form-control" min="0" name="email"/></td>
+                                        <td th:text="${item.product.amountTotal}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                            <div class="form-group-inner">
+                                <div class="login-btn-inner">
+                                    <div class="row">
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-9">
+                                            <div class="login-horizental cancel-wp pull-left">
+                                                <button class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/flagments/footer::footer"></th:block>
+</body>
+</html>

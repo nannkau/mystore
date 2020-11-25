@@ -81,4 +81,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductForInvoice(Integer number, String status) {
         return productRepository.getProductByAmountTotalGreaterThanAndStatusEquals(number,status);
     }
+
+    @Override
+    public List<Product> findProductBySupplier(int supplierId, String status) {
+        return productRepository.findBySupplierAndStatus(supplierId,status);
+    }
 }

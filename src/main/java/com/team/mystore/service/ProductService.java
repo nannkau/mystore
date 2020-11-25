@@ -12,5 +12,6 @@ public interface ProductService {
     public ProductDto findById(Integer id);
     public Product findProductById(Integer id);
     public List<Product> getProductForInvoice(Integer number,String status);
+    public List<Product> findProductBySupplier(int supplierId,String status);
 
 }
