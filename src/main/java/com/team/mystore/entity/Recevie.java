@@ -14,7 +14,7 @@ public class Recevie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recevie_id")
     private Integer receiveId;
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     @Column(name = "creat_date")
     private Date creatDate;
     @Column(name = "price_total")

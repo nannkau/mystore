@@ -34,7 +34,7 @@ public class InventoryServiceImpl implements InventoryService {
     private RecevieRepository recevieRepository;
     @Override
     public List<Recevie> findAll() {
-        return inventoryRepository.findAll();
+        return inventoryRepository.findAllOderByCreatDate();
     }
 
     @Override

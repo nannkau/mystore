@@ -43,7 +43,7 @@ public class InventoryController {
     @RequestMapping(value = "/inventory/index.html")
     public String index(Model model, @Valid ListInventory searchRecevie,BindingResult bindingResult) {
        model.addAttribute("recivies",inventoryService.findByDate(searchRecevie));
-       model.addAttribute("searchRecive",new ListInventory());
+       model.addAttribute("searchRecive",searchRecevie);
         return "inventory/index";
     }
 

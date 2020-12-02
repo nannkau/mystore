@@ -71,7 +71,7 @@ public class UserController {
         model.addAttribute("items",command);
         return "admin/edit";
     }
-    @RequestMapping(value = "/xa/user/edit.html",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/edit.html",method = RequestMethod.POST)
     public String edit(UserCommand userCommand, Model model, BindingResult result){
         if (result.hasErrors()) {
             return "/admin/user/edit.html?id="+userCommand.getPojo().getId();

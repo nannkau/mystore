@@ -62,7 +62,6 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Product name</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Category</th>
@@ -74,7 +73,6 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each=" recivieDetail :${recevie.getRecevieDetails()}">
-                                            <th scope="row" th:text="${recivieDetail.getRecevieDetailId()}"></th>
                                             <td  th:text="${recivieDetail.getProduct().getName()}"></td>
                                             <td th:text="${#numbers.formatDecimal(recivieDetail.getPrice(), 0, 'COMMA', 2, 'POINT')}"></td>
                                             <td th:text="${recivieDetail.getProduct().getCategory().getName()}"></td>

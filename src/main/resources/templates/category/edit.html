@@ -57,8 +57,8 @@
                                                     <div class="col-lg-9">
                                                         <div class="form-select-list">
                                                             <select class="form-control custom-select-value" name="account" th:field="*{status}">
-                                                                <option value="1">Active</option>
-                                                                <option value="0">Not Active</option>
+                                                                <option value="0">Active</option>
+                                                                <option value="1">Not Active</option>
                                                             </select>
                                                             <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}"  class="badge badge-danger left"></span>
                                                         </div>

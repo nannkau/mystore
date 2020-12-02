@@ -105,7 +105,6 @@
                                     <thead>
                                     <tr>
                                         <th data-checkbox="true"></th>
-                                        <th data-field="name">Id</th>
                                         <th data-field="address">Created Date</th>
                                         <th data-field="phone">Total Price</th>
                                         <th data-field="email">Employee</th>
@@ -116,8 +115,7 @@
                                     <tbody>
                                     <tr th:each=" recivie :${recivies}">
                                         <td></td>
-                                        <td th:text="${recivie.getReceiveId()}">Id</td>
-                                        <td th:text="${#dates.format(recivie.creatDate, 'dd-MMM-yyyy')}">Created Date
+                                        <td th:text="${#dates.format(recivie.creatDate, 'dd-MM-yyyy')}">Created Date
                                         </td>
                                         <td th:text="${#numbers.formatDecimal(recivie.getPriceTotal(), 0, 'COMMA', 2, 'POINT')}">
                                             Total Price

@@ -155,11 +155,11 @@
         }
         $('#s_supplier').val(c).change();
         var now = new Date();
-        now.setDate(now.getDate() + 1)
+        now.setDate(now.getDate());
         var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth())).slice(-2);
+        var month = ("0" + (now.getMonth()+1)).slice(-2);
 
-        var today = (day) + "/" + (month) + "/" + now.getFullYear();
+        var today = (month)+ "/"+(day)+ "/" + now.getFullYear();
 
         $('#datePicker').val(today);
         //name="category" th:onchange="'window.location.href = \'?supplier_id=\' + this.value ' "

@@ -11,37 +11,59 @@
     <div class="row">
         <div class="col-lg-6"></div>
         <div class="col-lg-12">
-<div class="post-user-profile-awrap post-user-profile-second shadow-reset">
-<div class="user-profile-post">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="user-profile-post-name">
-                <h2 th:text="${productDto.getName()}"></h2>
-                <p>Size:<span th:text="${productDto.getSizeProduct()}"></span>
-                </p>
-                <p>Price:<span th:text="${productDto.getSalePrice()}"></span>
-                </p>
-                <p>Category:<span th:text="${productDto.getCategory().getName()}"></span>
-                </p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="profile-user-post-content">
-                <p th:text="${productDto.getDetail()}"></p>
-                <img class="profile-user-post-img" th:src="@{'/uploads/' +${productDto.image}}"  alt="" />
-                <div class="user-post-reply">
-                    <div class="btn-group">
+            <div class="post-user-profile-awrap post-user-profile-second shadow-reset">
+                <div class="user-profile-post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <h2 th:text="${productDto.getName()}"></h2>
+                                <table class="table">
+
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Employee: </th>
+                                        <td  th:text="${#numbers.formatDecimal(productDto.getSalePrice(), 0, 'COMMA', 2, 'POINT')}"></td>
+                                        <th scope="row">Size: </th>
+                                        <td  th:text="${productDto.getSizeProduct()}"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Category: </th>
+                                        <td  th:text="${productDto.getCategory().getName()}"></td>
+                                        <th scope="row">Gender :</th>
+                                        <td  th:text="${productDto.sex=='0'? 'female':'male'}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="1" scope="row">Description: </th>
+                                        <td  colspan="1" th:text="${productDto.getDetail()}"></td>
+
+                                        <th colspan="1" scope="row">Amount: </th>
+                                        <td  colspan="1" th:text="${productDto.getAmountTotal()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="profile-user-post-content" >
+                                <img class="profile-user-post-img" th:src="@{'/uploads/' +${productDto.image}}" alt=""
+                                     style=" width: 400px; height: 300px; "/>
+                                <div class="user-post-reply">
+                                    <div class="btn-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
         </div>
         <div class="col-lg-6"></div>
     </div>
