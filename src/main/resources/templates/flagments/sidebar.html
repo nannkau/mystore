@@ -6,13 +6,11 @@
 </head>
 <body>
 <th:block th:fragment="sidebar">
-    <div class="wrapper-pro">
-        <div>
             <div class="header-top-area">
                 <div class="header-top">
                     <div class="container-fluid">
                         <div class="row" >
-                            <div class="col-lg-9 col-md-1 col-sm-1 col-xs-12">
+                            <div class="col-lg-9">
                                 <div class="header-top-menu tabl-d-n">
                                     <ul class="nav navbar-nav mai-top-nav">
                                         <li class="nav-item"><a th:href="@{/}" class="nav-link">Home</a>
@@ -48,7 +46,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12" sec:authorize="isAuthenticated()">
+                            <div class="col-lg-3" sec:authorize="isAuthenticated()">
                                 <div class="header-right-info">
                                     <ul class="nav navbar-nav mai-top-nav header-right-menu">
 
@@ -59,7 +57,6 @@
                                                 <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
                                             </a>
                                             <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
-                                                <li><a href="#"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
                                                 <li><a th:href="@{/logout}" class="nav-link"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
                                                 </li>
                                             </ul>
@@ -71,8 +68,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </th:block>
 
 </body>

@@ -23,14 +23,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getPassword()!=null){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 
     @Override
     public User update(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+      if (user.getPassword()==null){
+          user.setPassword(passwordEncoder.encode(userRepository.findById(user.getId()).getPassword()));
+      }
         return userRepository.save(user);
     }
 
